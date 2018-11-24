@@ -22,4 +22,5 @@ urlpatterns = [
     # path('', include('br.urls')),
     path('login/', uv.signin, name="login"),
     path('register/', uv.signup, name="register"),
+    path('index/', uv.index, name="index"),
 ]

@@ -36,4 +36,7 @@ def signup(request):
 
         login(request, user)
 
-    return render(request, 'user/register4.html')
+    return render(request, 'user/register.html')
+
+def index(request):
+    return render(request, 'user/index.html')
