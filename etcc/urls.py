@@ -19,8 +19,7 @@ from user import views as uv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include('br.urls')),
+    path('', include('br.urls')),
     path('login/', uv.signin, name="login"),
     path('register/', uv.signup, name="register"),
-    path('index/', uv.index, name="index"),
 ]

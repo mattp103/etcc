@@ -1,0 +1,91 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{% static 'br/assets/images/icon/favicon.ico' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'br/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/metisMenu.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/slicknav.min.css' %}">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="{% static 'br/assets/css/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/default-css.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/responsive.css' %}">
+    <!-- modernizr css -->
+    <script src="{% static 'br/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <style>
+        .parallax {
+            background-image: url("{% static 'br/assets/images/bg/signin-bg.jpg' %}");
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel position-absolute w-100">
+            <a class="navbar-brand mr-4" style="font-size: 30px; font-family: 'Roboto', 'sans-serif';" href="/">     BIBLEPLAN     </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+
+                </div>
+            </div>
+    </nav>
+</header>
+<main role="main">
+    <div class="parallax align-content-center pt-5">
+        <div class="bg-transparent text-white central" style="!important;top: 40%;">
+            <h1 style="font-size: 90px; font-family: 'Roboto', 'sans-serif';"><img src="{% static 'br/assets/images/media/logo.png' %}" alt="Logo" style="width: 500px;"></h1>
+            <p class="m-5">
+                Wordlearn is a revolutionary system for keeping track of progress of students. The whole system is focused
+                on simplicity with a foolproof class sorting system and i cant be bothered to write this anymore you guys
+                can make something up.
+            </p>
+            <button class="btn-1 btn-1a animated fadeIn delay-1s">Sign Up Today!</button>
+        </div>
+    </div>
+</main>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <!-- jquery latest version -->
+    <script src="{% static 'br/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
+    <!-- bootstrap 4 js -->
+    <script src="{% static 'br/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'br/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'br/assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'br/assets/js/metisMenu.min.js' %}"></script>
+    <script src="{% static 'br/assets/js/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'br/assets/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- others plugins -->
+    <script src="{% static 'br/assets/js/plugins.js' %}"></script>
+    <script src="{% static 'br/assets/js/scripts.js' %}"></script>
+</body>
+</html>
