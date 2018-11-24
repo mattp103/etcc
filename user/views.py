@@ -18,6 +18,7 @@ def signin(request):
 
 def signup(request):
     if request.method == 'POST':
+        username = request.POST.get('username')
         name = request.POST.get('name')
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
@@ -25,13 +26,13 @@ def signup(request):
 
         if len(name.split(' ')) == 1:
             first_name = name.split(' ')[0]
-            user = User.objects.create_user(username=first_name, first_name=first_name, email=email, password=password1)
+            user = User.objects.create_user(username=username, first_name=first_name, email=email, password=password1)
 
         elif len(name.split(' ')) > 1:
             first_name = name.split(' ')[0]
             last_name = name.split(' ')[len(name.split(' '))-1]
 
-            user = User.objects.create_user(username=first_name, first_name=first_name, last_name=last_name, email=email, password=password1)
+            user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password1)
 
 
         login(request, user)
