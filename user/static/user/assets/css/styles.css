@@ -2351,7 +2351,7 @@ table.dataTable thead td {
 
 .form-gp.focused label {
     top: -15px;
-    color: #7e74ff;
+    color: #64b9fc;
 }
 
 .form-gp input {
@@ -2381,7 +2381,7 @@ table.dataTable thead td {
     position: absolute;
     right: 5px;
     bottom: 15px;
-    color: #7e74ff;
+    color: #64b9fc;
     font-size: 16px;
 }
 
@@ -2443,7 +2443,7 @@ table.dataTable thead td {
 }
 
 .login-other a.fb-login {
-    background: #8655FC;
+    background: #64b9fc;
     color: #fff;
 }
 
