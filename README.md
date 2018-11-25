@@ -1,2 +1,2 @@
-# etcc
+# Together Bible
 HI!!!!!!!!!!!!!!!!!!
