@@ -26,7 +26,7 @@
     <script src="{% static 'br/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
     <style>
         .parallax {
-            background-image: url("{% static 'br/assets/images/bg/signin-bg.jpg' %}");
+            background-image: url("{% static 'br/assets/images/bg/singin-bg.jpg' %}");
             height: 100vh;
             background-attachment: fixed;
             background-position: center;
@@ -61,12 +61,14 @@
     <div class="parallax align-content-center pt-5">
         <div class="bg-transparent text-white central" style="!important;top: 40%;">
             <h1 style="font-size: 90px; font-family: 'Roboto', 'sans-serif';"><img src="{% static 'br/assets/images/media/logo.png' %}" alt="Logo" style="width: 500px;"></h1>
-            <p class="m-5">
+            <p class="m-5" style="!important;text-color:white;">
                 Wordlearn is a revolutionary system for keeping track of progress of students. The whole system is focused
                 on simplicity with a foolproof class sorting system and i cant be bothered to write this anymore you guys
                 can make something up.
             </p>
-            <button class="btn-1 btn-1a animated fadeIn delay-1s">Sign Up Today!</button>
+            <form action="{% url 'register' %}">
+                <button class="btn-1 btn-1a animated fadeIn delay-1s" type="submit">Sign Up Today!</button>
+            </form>
         </div>
     </div>
 </main>

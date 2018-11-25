@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import check_password
@@ -13,6 +13,8 @@ def signin(request):
 
         if user.check_password(password):
             login(request, user)
+
+        return redirect('index')
 
     return render(request, 'user/login.html')
 
@@ -36,5 +38,7 @@ def signup(request):
 
 
         login(request, user)
+
+        return redirect('index')
 
     return render(request, 'user/register.html')
