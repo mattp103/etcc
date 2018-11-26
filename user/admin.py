@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import UserProfile, Friend
+from .models import UserProfile
 
-admin.site.register(UserProfile)
-admin.site.register(Friend)
+class ProfileAdmin(admin.ModelAdmin):
+    model = UserProfile
+    filter_horizontal = ('friends',)
+
+admin.site.register(UserProfile, ProfileAdmin)

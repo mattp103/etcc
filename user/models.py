@@ -6,6 +6,7 @@ from django.dispatch import receiver
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
+    friends = models.ManyToManyField(User, related_name="person")
 
     def __str__(self):
         return self.user.first_name
@@ -19,16 +20,16 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
 
-class Friend(models.Model):
-    users = models.ManyToManyField(User)
-    current_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner', null=True)
-
-    @classmethod
-    def make_friend(cls, current_user, new_friend):
-        friend, created = cls.objects.get_or_create(current_user=current_user)
-        friend.users.add(new_friend)
-
-    @classmethod
-    def lose_friend(cls, current_user, new_friend):
-        friend, created = cls.objects.get_or_create(current_user=current_user)
-        friend.users.remove(new_friend)
+# class Friend(models.Model):
+#     users = models.ManyToManyField(User)
+#     current_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner', null=True)
+#
+#     @classmethod
+#     def make_friend(cls, current_user, new_friend):
+#         friend, created = cls.objects.get_or_create(current_user=current_user)
+#         friend.users.add(new_friend)
+#
+#     @classmethod
+#     def lose_friend(cls, current_user, new_friend):
+#         friend, created = cls.objects.get_or_create(current_user=current_user)
+#         friend.users.remove(new_friend)
