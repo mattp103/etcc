@@ -8,9 +8,9 @@ def index(request):
 @login_required
 def friend_view(request):
     user = request.user
-    friends = Friend.objects.filter(current_user=user)
+    friends = Friend.objects.filter(current_user=user).users
 
-    for friend in friends:
-        print(friend.current_user.username)
+    for user_ob in Friend.objects.filter(current_user=user).users:
+        print(user_ob.username)
 
     return render(request, 'br/friend_view.html', {'friends': friends})
