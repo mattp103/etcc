@@ -1,4 +1,7 @@
 {% extends 'br/index.html' %}
 {% block content %}
-<h1>Yo</h1>
+<h1>Your Friends ({{ friend_count }})</h1>
+{% for friend in friends %}
+    <h3>{{ friend.username }}</h3>
+{% endfor %}
 {% endblock %}
