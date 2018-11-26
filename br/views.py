@@ -15,3 +15,13 @@ def friend_view(request):
     print(friends)
 
     return render(request, 'br/friend_view.html', {'friends': friends, 'friend_count': len(friends)})
+
+@login_required
+def comment_create(request):
+    if request.method == 'POST':
+        user = request.user
+        title = request.POST.get('title')
+        text = request.POST.get('text')
+        verse = request.post.get('verse')
+
+        Comment.objects.create(author=user, title=title, text=text, verse=verse)
