@@ -20,7 +20,7 @@ def friend_view(request):
 
 
 @login_required
-def friend_view(request):
+def settings(request):
     return render(request, 'br/settings.html')
 
 # def new_friend(request):
