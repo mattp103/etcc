@@ -7,9 +7,6 @@ from .models import Comment
 def index(request):
     return render(request, 'br/index.html')
 
-def reading(request):
-    return render(request, 'br/reading.html')
-
 @login_required
 def friend_view(request):
     user = request.user
@@ -27,12 +24,13 @@ def friend_view(request):
 #     pass
 
 @login_required
-def comment_create(request):
+def reading(request):
     if request.method == 'POST':
+        print('POST REQUEST')
         user = request.user
         title = request.POST.get('title')
         text = request.POST.get('text')
-        verse = request.post.get('verse')
+        verse = request.POST.get('verse')
 
         Comment.objects.create(author=user, title=title, text=text, verse=verse)
 

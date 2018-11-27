@@ -8,3 +8,6 @@ class Comment(models.Model):
     date_posted = models.DateField(default=datetime.date.today)
     verse = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
