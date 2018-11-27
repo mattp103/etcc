@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
 from .models import Comment
 
+
 def index(request):
     return render(request, 'br/index.html')
 
@@ -17,11 +18,17 @@ def friend_view(request):
 
     return render(request, 'br/friend_view.html', {'friends': friends, 'friend_count': len(friends)})
 
+
+@login_required
+def friend_view(request):
+    return render(request, 'br/settings.html')
+
 # def new_friend(request):
 #     if request.method == 'POST':
 #         pass
 #
 #     pass
+
 
 @login_required
 def reading(request):
