@@ -54,8 +54,7 @@
                             <i class="ti ti-user user-thumb text-white pr-1"></i>
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ user.username }}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" href="{% url 'settings' %}">Profile</a>
                                 <a class="dropdown-item" href="#">Log Out</a>
                             </div>
                         </div>
@@ -70,6 +69,11 @@
                         <div class="grid-col"><h1>Settings</h1>
                         <br>
                         <p><b>Username:</b> {{ user.username }}</p>
+                        <br>
+                        <strong>Your Comments:</strong>
+                        {% for comment in comments %}
+                            <p><strong>{{ comment.title }}</strong> - {{ comment.verse }}  ----  {{ comment.text }}</p>
+                        {% endfor %}
                         </div>
                     </div>
                 </div>

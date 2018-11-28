@@ -21,7 +21,8 @@ def friend_view(request):
 
 @login_required
 def settings(request):
-    return render(request, 'br/settings.html')
+    comments = Comment.objects.filter(author=request.user).order_by('-date_posted')
+    return render(request, 'br/settings.html', {'comments': comments})
 
 # def new_friend(request):
 #     if request.method == 'POST':
