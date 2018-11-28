@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
@@ -24,11 +25,28 @@ def settings(request):
     comments = Comment.objects.filter(author=request.user).order_by('-date_posted')
     return render(request, 'br/settings.html', {'comments': comments})
 
+# @login_required
 # def new_friend(request):
 #     if request.method == 'POST':
-#         pass
+#         user = request.user
+#         search = request.POST.get("username")
 #
-#     pass
+#         user_x = User.objects.filter(username=search).exists()
+#
+#         if user_x:
+#             no_users = False
+#             friend_user = User.objects.get(username=search)
+#             friend = user.userprofile.friends.add(friend_user)
+#
+#             messages.success(request, f"User {friend.username} added to friends :)")
+#
+#         else:
+#             no_users = True
+#
+#     else:
+#         no_users = True
+#
+#     return render(request, 'br/new_friend.html', {'no_users': no_users})
 
 
 @login_required
