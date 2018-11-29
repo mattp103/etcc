@@ -62,3 +62,7 @@ def reading(request):
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=user)})
+
+
+def edit_profile(request):
+    pass

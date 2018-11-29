@@ -68,7 +68,7 @@
                     <div class="col-12">
                         <div class="grid-col"><h1>Settings</h1>
                         <br>
-                        <p><b>Username:</b> {{ user.username }}</p>
+                        <p><b>Username:</b> {{ user.username }}<a href="{% url 'profile-edit' %}"></p>
                         <br>
                         <strong>Your Comments:</strong>
                         {% for comment in comments %}
