@@ -1,0 +1,8 @@
+{% extends 'br/index.html' %}
+{% block content %}
+<h1>{{ user.username }}</h1>
+<strong>Comments:</strong>
+{% for comment in comments %}
+    <p><strong>{{ comment.title }}</strong> - {{ comment.verse }}  ----  {{ comment.text }}</p>
+{% endfor %}
+{% endblock %}

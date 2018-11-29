@@ -24,29 +24,23 @@ def friend_view(request):
 def settings(request):
     comments = Comment.objects.filter(author=request.user).order_by('-date_posted')
     return render(request, 'br/settings.html', {'comments': comments})
+@login_required
 
-# @login_required
-# def new_friend(request):
-#     if request.method == 'POST':
-#         user = request.user
-#         search = request.POST.get("username")
-#
-#         user_x = User.objects.filter(username=search).exists()
-#
-#         if user_x:
-#             no_users = False
-#             friend_user = User.objects.get(username=search)
-#             friend = user.userprofile.friends.add(friend_user)
-#
-#             messages.success(request, f"User {friend.username} added to friends :)")
-#
-#         else:
-#             no_users = True
-#
-#     else:
-#         no_users = True
-#
-#     return render(request, 'br/new_friend.html', {'no_users': no_users})
+def new_friend(request):
+    if request.method == 'POST':
+        user = request.user
+        search = request.POST.get("username")
+
+        user_x = User.objects.filter(username=search).exists()
+
+        if user_x:
+            profile = User.objects.get(username=search)
+            return redirect('/profile/' + profile.username)
+
+        else:
+            messages.error(request, f"No user with the username {search}")
+
+    return render(request, 'br/new_friend.html')
 
 
 @login_required
@@ -63,3 +57,8 @@ def reading(request):
         return redirect('index')
 
     return render(request, 'br/reading.html')
+
+
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=user)})

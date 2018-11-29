@@ -60,7 +60,20 @@
 <main role="main">
     <div class="parallax align-content-center pt-5">
         <div class="bg-transparent central" style="!important;top: 40%;">
-            {% if messages %}{{ messages }}{% endif %}
+          {% if messages %}
+                  {% for message in messages %}
+                    {% if 'error' in message.tags %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+
+                  {% endfor %}
+              {% endif %}
             {% block content %}
                 <h1 style="font-size: 90px; font-family: 'Roboto', 'sans-serif';"><img src="{% static 'br/assets/images/media/logo.png' %}" alt="Logo" style="width: 500px;"></h1>
                 <p class="m-5" style="text-color:white!important;">
