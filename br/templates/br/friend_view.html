@@ -1,6 +1,7 @@
 {% extends 'br/index.html' %}
 {% block content %}
 <h1>Your Friends ({{ friend_count }})</h1>
+<h3><a href="{% url 'new_friend' %}">Add New</a></h3>
 {% for friend in friends %}
     <h3>{{ friend.username }}</h3>
 {% endfor %}

@@ -24,8 +24,9 @@ def friend_view(request):
 def settings(request):
     comments = Comment.objects.filter(author=request.user).order_by('-date_posted')
     return render(request, 'br/settings.html', {'comments': comments})
-@login_required
 
+
+@login_required
 def new_friend(request):
     if request.method == 'POST':
         user = request.user
@@ -61,8 +62,25 @@ def reading(request):
 
 def profile(request, username):
     user = get_object_or_404(User, username=username)
+    if request.method == 'POST':
+        request.user.userprofile.friends.add(user)
+        messages.success(request, f'User {user.username} added to friends!')
+
+        return redirect('index')
+
     return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=user)})
 
 
-def edit_profile(request):
-    pass
+def edit_profile(request, username):
+    if request.method == 'POST':
+        new_username = request.POST.get('field1')
+        if len(User.objects.filter(username=new_username)) == 0:
+            request.user.username = new_username
+            request.user.save()
+            messages.success(request, f'username updated to {new_username}')
+        else:
+            messages.error(request, 'Username with that name already exists')
+
+        return redirect(f'index')
+
+    return render(request, 'br/profile_edit.html')

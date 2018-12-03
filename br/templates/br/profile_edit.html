@@ -1,0 +1,9 @@
+{% extends 'br/index.html' %}
+{% block content %}
+    <h1>Edit Username</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="field1" placeholder="{{ user.username }}">
+        <input type="submit" name="submit" value="Save">
+    </form>
+{% endblock %}

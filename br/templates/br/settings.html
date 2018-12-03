@@ -68,7 +68,7 @@
                     <div class="col-12">
                         <div class="grid-col"><h1>Settings</h1>
                         <br>
-                        <p><b>Username:</b> {{ user.username }}<a href="{% url 'profile-edit' %}"></p>
+                        <p><b>Username:</b> {{ user.username }}<a href="/profile/{{ user.username }}/edit"><img src="{% static 'br/assets/media/images/icon/edit.png' %}"></a></p>
                         <br>
                         <strong>Your Comments:</strong>
                         {% for comment in comments %}

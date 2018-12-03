@@ -1,6 +1,6 @@
 {% extends 'br/index.html' %}
 {% block content %}
-<h1>{{ user.username }}</h1>
+<h1>{{ user.username }} <form method="post">{% csrf_token %}<input type="submit" value="+"></form></h1>
 <strong>Comments:</strong>
 {% for comment in comments %}
     <p><strong>{{ comment.title }}</strong> - {{ comment.verse }}  ----  {{ comment.text }}</p>
