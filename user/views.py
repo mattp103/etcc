@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import check_password
 from django.contrib import messages
 
@@ -42,3 +43,8 @@ def signup(request):
         return redirect('index')
 
     return render(request, 'user/register.html')
+
+@login_required
+def signout(request):
+    logout(request)
+    return render(request, 'user/logout.html')
