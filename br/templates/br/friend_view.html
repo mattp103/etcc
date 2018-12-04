@@ -1,8 +1,26 @@
-{% extends 'br/index.html' %}
+{% extends 'br/home.html' %}
+
+{% block title %}Friends{% endblock %}
+
+
+{% block top %}
+<h4 class="page-title pull-left">Friends</h4>
+<ul class="breadcrumbs pull-left">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><span>Friends</span></li>
+</ul>
+{% endblock %}
+
 {% block content %}
-<h1>Your Friends ({{ friend_count }})</h1>
-<h3><a href="{% url 'new_friend' %}">Add New</a></h3>
-{% for friend in friends %}
-    <h3>{{ friend.username }}</h3>
-{% endfor %}
+<br>
+<br>
+<div class="row rounded settings-bg settings-bd">
+    <div class="col-12 trans-bg settings-bd" style="background-color: rgba(243, 248, 251, 0) !important;">
+        <h1><u><strong> Your Friends: {{ friend_count }}</strong></u></h1>
+        <button type="button" href="{% url 'new_friend' %}" class="btn btn-success mb-3"><h4>Add New <i class="fa fa-plus"></i></h4></button>
+        {% for friend in friends %}
+            <h3>{{ friend.username }}</h3>
+        {% endfor %}
+        </div>
+    </div>
 {% endblock %}

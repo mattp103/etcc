@@ -1546,7 +1546,7 @@ table.dbkit-table tr td {
     opacity: 0;
 }
 
-@-webkit-keyframes "pulse" {
+/*@-webkit-keyframes "pulse" {
     0% {
         -webkit-transform: scale(0);
         opacity: 0.0;
@@ -1571,7 +1571,7 @@ table.dbkit-table tr td {
 
 .testimonial-carousel {
     margin: 60px 0 28px;
-}
+} */
 
 .tstu-img {
     width: 70px;
@@ -3021,3 +3021,15 @@ table.dataTable thead td {
 }
 
 /*-------------------- END Offset Sidebar ------------------- */
+
+.settings-bg{
+    background-color: rgba(243, 248, 251, 0.7) !important;
+}
+
+.trans-bg{
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.settings-bd{
+    border: 0px !important;;
+}

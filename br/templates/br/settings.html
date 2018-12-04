@@ -1,105 +1,42 @@
-{% load static %}
-<!doctype html>
-<html class="no-js" lang="en">
+{% extends 'br/home.html' %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Reading</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="{% static 'br/assets/images/icon/favicon.ico' %}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'br/assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'br/assets/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'br/assets/css/themify-icons.css' %}">
-    <link rel="stylesheet" href="{% static 'br/assets/css/metisMenu.css' %}">
-    <link rel="stylesheet" href="{% static 'br/assets/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'br/assets/css/slicknav.min.css' %}">
-    <!-- amchart css -->
-    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-    <!-- others css -->
-    <link rel="stylesheet" href="{% static 'br/assets/css/typography.css' %}">
-    <link rel="stylesheet" href="{% static 'br/assets/css/default-css.css' %}">
-    <link rel="stylesheet" href="{% static 'br/assets/css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'br/assets/css/responsive.css' %}">
-    <!-- modernizr css -->
-    <script src="{% static 'br/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
-</head>
+{% block title %}Settings{% endblock %}
 
-<body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- preloader area start -->
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-    <!-- preloader area end -->
-        <!-- main content area start -->
-        <div class="main-content">
-            <!-- page title area start -->
-            <div class="page-title-area">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Reading</h4>
-                            <ul class="breadcrumbs pull-left">
-                                <li><a href="{% url 'index' %}">Home</a></li>
-                                <li><span>Reading</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 clearfix">
-                        <div class="user-profile pull-right">
-                            <i class="ti ti-user user-thumb text-white pr-1"></i>
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ user.username }}<i class="fa fa-angle-down"></i></h4>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{% url 'settings' %}">Profile</a>
-                                <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- page title area end -->
-            <br><br>
-            <div class="main-content-inner m-5">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="grid-col"><h1>Settings</h1>
-                        <br>
-                        <p><b>Username:</b> {{ user.username }}<a href="/profile/{{ user.username }}/edit"><img src="{% static 'br/assets/media/images/icon/edit.png' %}"></a></p>
-                        <br>
-                        <strong>Your Comments:</strong>
-                        {% for comment in comments %}
-                            <p><strong>{{ comment.title }}</strong> - {{ comment.verse }}  ----  {{ comment.text }}</p>
-                        {% endfor %}
-                        </div>
-                    </div>
+
+{% block top %}
+<h4 class="page-title pull-left">Settings</h4>
+<ul class="breadcrumbs pull-left">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><span>Settings</span></li>
+</ul>
+{% endblock %}
+
+
+{% block content %}
+<br>
+<br>
+<div class="row rounded settings-bg settings-bd">
+    <div class="col-12 trans-bg settings-bd" style="background-color: rgba(243, 248, 251, 0) !important;">
+        <div class="grid-col trans-bg settings-bd"><h1><u><strong>Settings</strong></u></h1>
+        <br>
+        <br>
+        <h4><strong>Username:</strong></h4>
+        <h5>{{ user.username }} <span class="m-4"></span><a class="text-white" href="/profile/{{ user.username }}/edit">Edit Username  <i class="fa fa-edit"></i> </a></h5>
+        <br>
+        <br>
+        <h4><strong>Your Comments:</strong></h4>
+        {% for comment in comments %}
+        <div class="col-lg-4 col-md-6 mt-3">
+            <div class="card card-bordered">
+                <div class="card-body">
+                    <h5 class="title">{{ comment.title }}</h5>
+                    <h6 class="card-title">Verse: {{ comment.verse }}</h6>
+                    <p class="card-text">{{ comment.text }}</p>
                 </div>
             </div>
         </div>
-        <!-- main content area end -->
-        <!-- footer area start-->
-        <footer>
-            <div class="footer-area">
-                <p>Developed by <a href="https://github.com/mattp103/etcc">MECo</a>.</p>
-            </div>
-        </footer>
-        <!-- footer area end-->
-    <!-- jquery latest version -->
-    <script src="{% static 'br/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
-    <!-- bootstrap 4 js -->
-    <script src="{% static 'br/assets/js/popper.min.js' %}"></script>
-    <script src="{% static 'br/assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'br/assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'br/assets/js/metisMenu.min.js' %}"></script>
-    <script src="{% static 'br/assets/js/jquery.slimscroll.min.js' %}"></script>
-    <script src="{% static 'br/assets/js/jquery.slicknav.min.js' %}"></script>
-
-    <!-- others plugins -->
-    <script src="{% static 'br/assets/js/plugins.js' %}"></script>
-    <script src="{% static 'br/assets/js/scripts.js' %}"></script>
-</body>
-
-</html>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

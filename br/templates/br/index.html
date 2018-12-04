@@ -2,43 +2,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Together Bible | Home</title>
-<meta name="description" content="">
-<meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{% static 'br/assets/images/icon/favicon.ico' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'br/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/metisMenu.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/slicknav.min.css' %}">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="{% static 'br/assets/css/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/default-css.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'br/assets/css/responsive.css' %}">
+    <!-- modernizr css -->
+    <script src="{% static 'br/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <style>
+        .parallax {
+            background-image: url("{% static 'br/assets/images/bg/singin-bg.jpg' %}");
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 
-<!-- Favicons
-    ================================================== -->
-<link rel="shortcut icon" href="{% static 'br/assets/images/icon/favicon.ico' %}" type="image/x-icon">
-
-<!-- Bootstrap -->
-<link rel="stylesheet" type="text/css"  href="{% static 'br/assets/css/index.min.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'br/assets/css/font-awesome.min.css' %}">
-<link rel="stylesheet" href="{% static 'br/assets/css/default-css.css' %}">
-
-<!-- Stylesheet
-    ================================================== -->
-<link rel="stylesheet" type="text/css"  href="{% static 'br/assets/css/indexstyles.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'br/assets/css/prettyPhoto.css' %}">
-<link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="{% static 'br/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-<<<<<<< HEAD
 <body>
+<!-- Header -->
+<div id="preloader">
+    <div class="loader"></div>
+</div>
 <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel position-absolute w-100">
-            <a class="navbar-brand mr-4" style="font-size: 30px; font-family: 'Roboto', 'sans-serif';" href="/">     BIBLEPLAN     </a>
+            <a class="navbar-brand mr-4" style="font-size: 30px; font-family: 'Roboto', 'sans-serif';" href="/">     TOGETHERBIBLE     </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -78,77 +83,19 @@
                 {% endfor %}
             {% endif %}
             {% block content %}
-                <h1 style="font-size: 90px; font-family: 'Roboto', 'sans-serif';"><img src="{% static 'br/assets/images/media/logo.png' %}" alt="Logo" style="width: 500px;"></h1>
-                <h5 class="m-5 text-white">
+                <img src="{% static 'br/assets/images/media/logo.png' %}" alt="Logo" style="width: 600px;">
+                <h5 class=" m-5 text-white">
                     Wordlearn is a revolutionary system for keeping track of progress of students. The whole system is focused
                     on simplicity with a foolproof class sorting system and i cant be bothered to write this anymore you guys
                     can make something up.
                 </h5>
                 <form action="{% url 'register' %}">
-                    <button class="btn-1 btn-1a animated fadeIn delay-1s" type="submit">Sign Up Today!</button>
+                    <button class="btn-1 btn-1a" type="submit">Sign Up Today!</button>
                 </form>
             {% endblock %}
-=======
-<!-- Header -->
-<div id="preloader">
-    <div class="loader"></div>
-</div>
-
-<!-- Navigation -->
-{% if user.is_authenticated %}
-<div id="nav">
-  <nav class="navbar navbar-custom">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> <i class="fa fa-bars"></i> </button>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse navbar-main-collapse">
-        <ul class="nav navbar-nav">
-          <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-          <li class="hidden"> <a href="#page-top"></a> </li>
-          <li> <a class="page-scroll" href="#page-top">Home</a> </li>
-          <li> <a class="page-scroll" href="{% url 'friends' %}">Friends</a> </li>
-          <li> <a class="page-scroll" href="{% url 'settings' %}">Settings</a> </li>
-          <li> <a class="page-scroll" href="#portfolio">Portfolio</a> </li>
-          <li> <a class="page-scroll" href="#testimonials">Testimonials</a> </li>
-          <li> <a class="page-scroll" href="#contact">Contact</a> </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</div>
-{% endif %}
-
-<header id="header" style="height: 100vh;">
-  <div class="intro text-center" style="height: 100vh;">
-    <div class="overlay" style="height: 100vh;">
-      <div class="container">
-        <div class="row">
-          <div class="intro-text center-block align-self-auto">
-            <h1>Together Bible</h1>
-            <p>A great way to read your Bible and share with your friends!</p>
-            {% if user.is_authenticated %}
-            <p>Welcome back {{ user.username }}!</p>
-            {% else %}
-            <a href="{% url 'register' %}" class="btn btn-default btn-lg page-scroll">Sign up</a>
-            <a href="{% url 'login' %}" class="btn btn-default btn-lg page-scroll">Login</a></div>
-            {% endif %}
->>>>>>> 221650bb1d403a74909ad5af4dced717002c9da1
         </div>
-      </div>
     </div>
-  </div>
-</header>
-
-<div id="footer">
-  <div class="container text-center position-relative">
-    <div class="fnav">
-      <p>Copyright &copy; MECo 2018.</p>
-    </div>
-  </div>
-</div>
+</main>
 
 <script src="{% static 'br/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
 <!-- bootstrap 4 js -->
