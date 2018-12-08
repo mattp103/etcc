@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
 from .models import Comment
 
-
+@login_required
 def home(request):
     return render(request, 'br/home.html')
 def index(request):
@@ -73,7 +73,7 @@ def profile(request, username):
     return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=user)})
 
 
-def edit_profile(request, username):
+def edit_profile(request):
     if request.method == 'POST':
         new_username = request.POST.get('field1')
         if len(User.objects.filter(username=new_username)) == 0:
@@ -86,3 +86,22 @@ def edit_profile(request, username):
         return redirect(f'index')
 
     return render(request, 'br/profile_edit.html')
+
+
+@login_required
+def password(request):
+    if request.method == 'POST':
+        cp = request.POST.get('cp')
+        new_password = request.POST.get('password')
+        password_conf = request.POST.get('password2')
+        if cp == request.user.password:
+            if new_password == password_conf:
+                request.user.password = new_password
+                return redirect('home')
+                messages.success(request, 'Your password was changed')
+            else:
+                messages.error(request, 'passwords did not match')
+        else:
+            return messages.error(request, 'Your password was incorrect')
+
+    return render(request, 'br/password.html')

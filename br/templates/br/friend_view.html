@@ -17,7 +17,7 @@
 <div class="row rounded settings-bg settings-bd">
     <div class="col-12 trans-bg settings-bd" style="background-color: rgba(243, 248, 251, 0) !important;">
         <h1><u><strong> Your Friends: {{ friend_count }}</strong></u></h1>
-        <button type="button" href="{% url 'new_friend' %}" class="btn btn-success mb-3"><h4>Add New <i class="fa fa-plus"></i></h4></button>
+        <button type="button" class="btn btn-success mb-3"><a href="{% url 'new_friend' %}"><h4 class="text-white">Add New <i class="fa fa-plus"></i></h4></a></button>
         {% for friend in friends %}
             <h3>{{ friend.username }}</h3>
         {% endfor %}
