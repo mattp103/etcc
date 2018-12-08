@@ -6,14 +6,10 @@ from user.models import UserProfile
 from .models import Comment
 
 
-def index(request):
-    return render(request, 'br/index.html')
-
-
-@login_required
 def home(request):
     return render(request, 'br/home.html')
-
+def index(request):
+    return render(request, 'br/index.html')
 
 @login_required
 def friend_view(request):
