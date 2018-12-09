@@ -21,7 +21,7 @@
         <br>
         <br>
         <h4><strong>Username:</strong></h4>
-        <h5>{{ user.username }} <span class="m-4"></span><a class="text-white" href="/profile/{{ user.username }}/edit">Edit Username  <i class="fa fa-edit"></i> </a></h5>
+        <h5>{{ user.username }} <span class="m-4"></span><a class="text-white" href="{% url 'profile-edit' %}">Edit Username  <i class="fa fa-edit"></i> </a></h5>
         <br>
         <br>
         <h4><strong>Your Comments:</strong></h4>

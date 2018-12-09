@@ -5,11 +5,16 @@ from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
 from .models import Comment
 
+
 @login_required
 def home(request):
     return render(request, 'br/home.html')
+
+
 def index(request):
     return render(request, 'br/index.html')
+
+
 
 @login_required
 def friend_view(request):
@@ -62,6 +67,7 @@ def reading(request):
     return render(request, 'br/reading.html')
 
 
+@login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     if request.method == 'POST':
@@ -73,6 +79,7 @@ def profile(request, username):
     return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=user)})
 
 
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         new_username = request.POST.get('field1')

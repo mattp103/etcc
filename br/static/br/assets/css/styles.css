@@ -51,6 +51,17 @@
 
 -----------------------------------------------------------------------------------*/
 
+/*------------------------- 1. Logo -----------------------*/
+
+@import url("https://use.typekit.net/vty1otr.css");
+
+.logo_font{
+    font-family: proxima-nova,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: white;
+}
+
 /*------------------------- 2. Index ----------------------*/
 
 .bg-steel {

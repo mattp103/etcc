@@ -41,7 +41,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="{% static 'br/assets/images/media/logo.png' %}" alt="logo"></a>
+                    <a href="{% url 'home' %}"><img src="{% static 'br/assets/images/media/logo.png' %}" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -80,7 +80,7 @@
                         </div>
                         <div class="search-box pull-left">
                             <form action="#">
-                                <input type="text" name="search"placeholder="Search (work in progress)" disabled required>
+                                <input type="text" name="search" placeholder="Search" disabled required>
                                 <i class="ti-search"></i>
                             </form>
                         </div>
@@ -107,11 +107,7 @@
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
                         {% block top %}
-                            <h4 class="page-title pull-left">Dashboard</h4>
-                            <ul class="breadcrumbs pull-left">
-                                <li><a href="{% url 'home' %}">Home</a></li>
-                                <li><span>Cards</span></li>
-                            </ul>
+                            <h4 class="page-title pull-left">Home</h4>
                         {% endblock %}
                         </div>
                     </div>
@@ -129,6 +125,20 @@
                 </div>
             </div>
             <!-- page title area end -->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'error' in message.tags %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+            {% endif %}
             <div class="main-content-inner login-bg">
             {% block content %}
 
