@@ -62,7 +62,7 @@ def reading(request):
 
         Comment.objects.create(author=user, title=title, text=text, verse=verse)
 
-        return redirect('index')
+        return redirect('home')
 
     return render(request, 'br/reading.html')
 
@@ -71,10 +71,12 @@ def reading(request):
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     if request.method == 'POST':
-        request.user.userprofile.friends.add(user)
-        messages.success(request, f'User {user.username} added to friends!')
-
-        return redirect('index')
+        if user != request.user:
+            request.user.userprofile.friends.add(user)
+            messages.success(request, f'User {user.username} added to friends!')
+        else:
+            messages.error(request, "You cannot add yourself. Don't be lonely!")
+        return redirect('home')
 
     return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=user)})
 
@@ -90,7 +92,7 @@ def edit_profile(request):
         else:
             messages.error(request, 'Username with that name already exists')
 
-        return redirect(f'index')
+        return redirect('home')
 
     return render(request, 'br/profile_edit.html')
 
