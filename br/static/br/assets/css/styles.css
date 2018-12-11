@@ -62,6 +62,12 @@
     color: white;
 }
 
+.v{
+    position: relative;
+    top: -0.5em;
+    font-size: 80%;
+}
+
 /*------------------------- 2. Index ----------------------*/
 
 .bg-steel {

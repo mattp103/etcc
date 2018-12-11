@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
 from .models import Comment
-
+import readings
 
 @login_required
 def home(request):
@@ -52,7 +52,7 @@ def new_friend(request):
 
 
 @login_required
-def reading(request):
+def reading(request, book, chapter):
     if request.method == 'POST':
         print('POST REQUEST')
         user = request.user
@@ -62,9 +62,13 @@ def reading(request):
 
         Comment.objects.create(author=user, title=title, text=text, verse=verse)
 
-        return redirect('home')
+        return redirect('reading')
 
-    return render(request, 'br/reading.html')
+    try:
+        return render(request, 'br/reading.html', {'reading': readings.chp("7142879509583d59-04", book, chapter), 'reference': readings.chref("7142879509583d59-04", book, chapter)})
+    except:
+        messages.error(request, "Bible passage does not exist :(")
+        return redirect('home')
 
 
 @login_required
@@ -114,3 +118,7 @@ def password(request):
             return messages.error(request, 'Your password was incorrect')
 
     return render(request, 'br/password.html')
+
+@login_required
+def redirect(request):
+    return redirect('home')
