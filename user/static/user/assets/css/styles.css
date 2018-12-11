@@ -1546,7 +1546,7 @@ table.dbkit-table tr td {
     opacity: 0;
 }
 
-@-webkit-keyframes "pulse" {
+@-webkit-keyframes pulse {
     0% {
         -webkit-transform: scale(0);
         opacity: 0.0;
@@ -2512,7 +2512,7 @@ table.dataTable thead td {
   -webkit-transform: scale(0);
           transform: scale(0);
   color: white;
-  -webkit-text-stroke: 0;
+  -webkit-text-stroke-width: 0;
   -webkit-animation: icon 0.3s cubic-bezier(1, 0.008, 0.565, 1.65) 0.1s 1 forwards;
           animation: icon 0.3s cubic-bezier(1, 0.008, 0.565, 1.65) 0.1s 1 forwards;
 }

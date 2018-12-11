@@ -65,15 +65,14 @@
             <br><br>
             <div class="main-content-inner">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="left">
                         <div class="grid-col">
                         <h3><strong>{{ reference }}</strong></h3><br>
-                        {{ reading|safe }}
-                        <!--reading-->
-                        <!--copyright-->
+                        {{ reading|safe }}<br><br><br>
+                        <h6>{{ copyright }}</h6>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="right">
                         <div class="grid-col">
                             <div class="card">
                                 <div class="card-body">
@@ -132,6 +131,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="btn btn-flat btn-success float-right" id="hidecomments">Hide Comments, Notes and Prayers</button>
             </div>
         </div>
         <!-- main content area end -->
@@ -145,6 +145,23 @@
     <!-- jquery latest version -->
     <script src="{% static 'br/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
     <!-- bootstrap 4 js -->
+    <script>
+        $(document).ready(function(){
+            $("#hidecomments").click(function(){
+                $("#right").toggle();
+                const l = $( "#left" );
+                if(l.hasClass("col-md-6")){
+                    l.removeClass("col-md-6");
+                    l.addClass("col-lg-12");
+                    $("#hidecomments").text("Show Comments, Notes and Prayers");
+                } else {
+                    l.removeClass("col-lg-12");
+                    l.addClass("col-md-6");
+                    $("#hidecomments").text("Hide Comments, Notes and Prayers");
+                }
+            });
+        });
+    </script>
     <script src="{% static 'br/assets/js/popper.min.js' %}"></script>
     <script src="{% static 'br/assets/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'br/assets/js/owl.carousel.min.js' %}"></script>

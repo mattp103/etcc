@@ -52,7 +52,7 @@ def new_friend(request):
 
 
 @login_required
-def reading(request, book, chapter):
+def reading(request, plan, number):
     if request.method == 'POST':
         print('POST REQUEST')
         user = request.user
@@ -62,12 +62,12 @@ def reading(request, book, chapter):
 
         Comment.objects.create(author=user, title=title, text=text, verse=verse)
 
-        return redirect('reading')
+        return redirect('home')
 
     try:
-        return render(request, 'br/reading.html', {'reading': readings.chp("7142879509583d59-04", book, chapter), 'reference': readings.chref("7142879509583d59-04", book, chapter)})
+        return render(request, 'br/reading.html', {'reading': readings.rng(plan, int(number))[2], 'reference': readings.rng(plan, int(number))[1], 'copyright': readings.rng(plan, int(number))[0]})
     except:
-        messages.error(request, "Bible passage does not exist :(")
+        messages.error(request, "ERROR: Reading plan does not exist :(")
         return redirect('home')
 
 
