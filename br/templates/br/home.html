@@ -41,7 +41,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="{% url 'home' %}"><img src="{% static 'br/assets/images/media/logo.png' %}" alt="logo"></a>
+                    <a href="{% url 'index' %}"><img src="{% static 'br/assets/images/media/logo.png' %}" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -49,7 +49,7 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li>
-                                <a href="{% url 'home' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Home</span></a>
+                                <a href="{% url 'index' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Home</span></a>
                             </li>
                             <li>
                                 <a href="/profile/{{ user.username }}" aria-expanded="true"><i class="ti-user"></i><span>Profile</span></a>

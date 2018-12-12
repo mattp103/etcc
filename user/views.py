@@ -14,7 +14,7 @@ def signin(request):
         if user.check_password(password):
             login(request, user)
 
-        return redirect('home')
+        return redirect('index')
 
     return render(request, 'user/login.html')
 
@@ -39,10 +39,20 @@ def signup(request):
 
         login(request, user)
 
-        return redirect('home')
+        return redirect('index')
 
     return render(request, 'user/register.html')
 
 def signout(request):
     logout(request)
     return render(request, "user/logout.html")
+
+
+
+def delete(request):
+    if request.method == 'POST':
+        request.user.delete()
+        return redirect('index')
+        messages.success(request, 'Account deleted')
+
+    return render(request, 'user/delete.html')

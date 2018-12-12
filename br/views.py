@@ -6,13 +6,11 @@ from user.models import UserProfile
 from .models import Comment
 import readings
 
-@login_required
-def home(request):
-    return render(request, 'br/home.html')
-
-
 def index(request):
-    return render(request, 'br/index.html')
+    if request.user.is_authenticated:
+        return render(request, 'br/home.html')
+    else:
+        return render(request, 'br/index.html')
 
 
 
@@ -62,13 +60,13 @@ def reading(request, plan, number):
 
         Comment.objects.create(author=user, title=title, text=text, verse=verse)
 
-        return redirect('home')
+        return redirect('index')
 
     try:
         return render(request, 'br/reading.html', {'reading': readings.rng(plan, int(number))[2], 'reference': readings.rng(plan, int(number))[1], 'copyright': readings.rng(plan, int(number))[0]})
     except:
         messages.error(request, "ERROR: Reading plan does not exist :(")
-        return redirect('home')
+        return redirect('index')
 
 
 @login_required
@@ -80,7 +78,7 @@ def profile(request, username):
             messages.success(request, f'User {user.username} added to friends!')
         else:
             messages.error(request, "You cannot add yourself. Don't be lonely!")
-        return redirect('home')
+        return redirect('index')
 
     return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=user)})
 
@@ -96,7 +94,7 @@ def edit_profile(request):
         else:
             messages.error(request, 'Username with that name already exists')
 
-        return redirect('home')
+        return redirect('index')
 
     return render(request, 'br/profile_edit.html')
 
@@ -110,7 +108,7 @@ def password(request):
         if cp == request.user.password:
             if new_password == password_conf:
                 request.user.password = new_password
-                return redirect('home')
+                return redirect('index')
                 messages.success(request, 'Your password was changed')
             else:
                 messages.error(request, 'passwords did not match')
@@ -121,4 +119,4 @@ def password(request):
 
 @login_required
 def redirect(request):
-    return redirect('home')
+    return redirect('index')
