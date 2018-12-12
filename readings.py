@@ -33,9 +33,9 @@ def rd(ver,book,chp):
 
 def rng(plan, num):
     folder = "br/plans/"+plan+"/reading.json"
-    a = open(folder, "r")
-    b = json.loads(a.read())
-    c = b["data2"]
+    json_file = open(folder, "r")
+    decoded_json = json.loads(json_file.read())
+    c = decoded_json["data2"]
     e = c[int(strftime("%j"))]
     f = e[num]
     j = f.split()
