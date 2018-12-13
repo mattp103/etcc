@@ -7,10 +7,11 @@ from .models import Comment
 import readings
 
 def index(request):
-    if request.user.is_authenticated:
+    user = request.user
+    if user.is_authenticated:
         return render(request, 'br/home.html')
-    else:
-        return render(request, 'br/index.html')
+
+    return render(request, 'br/index.html')
 
 
 
@@ -71,16 +72,18 @@ def reading(request, plan, number):
 
 @login_required
 def profile(request, username):
-    user = get_object_or_404(User, username=username)
+    usr = get_object_or_404(User, username=username)
     if request.method == 'POST':
-        if user != request.user:
-            request.user.userprofile.friends.add(user)
-            messages.success(request, f'User {user.username} added to friends!')
+        if usr != request.user:
+            request.user.userprofile.friends.add(usr)
+            return redirect('index')
+            messages.success(request, f'User {usr.username} added to friends!')
         else:
+            return redirect('')
             messages.error(request, "You cannot add yourself. Don't be lonely!")
-        return redirect('index')
 
-    return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=user)})
+
+    return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=usr)})
 
 
 @login_required
