@@ -10,8 +10,8 @@ def index(request):
     user = request.user
     if user.is_authenticated:
         return render(request, 'br/home.html')
-
-    return render(request, 'br/index.html')
+    else:
+        return render(request, 'br/index.html')
 
 
 
@@ -79,11 +79,15 @@ def profile(request, username):
             return redirect('index')
             messages.success(request, f'User {usr.username} added to friends!')
         else:
-            return redirect('')
+            return redirect('index')
             messages.error(request, "You cannot add yourself. Don't be lonely!")
 
-
-    return render(request, 'br/profile.html', {'user': user, 'comments': Comment.objects.filter(author=usr)})
+    else:
+        if usr in request.user.userprofile.friends.all():
+            at = False
+        else:
+            at = True
+    return render(request, 'br/profile.html', {'user': usr, 'comments': Comment.objects.filter(author=usr), 'at':at})
 
 
 @login_required
@@ -120,6 +124,6 @@ def password(request):
 
     return render(request, 'br/password.html')
 
-@login_required
-def redirect(request):
-    return redirect('index')
+# @login_required
+# def redirect(request):
+#     return redirect('index')
