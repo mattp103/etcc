@@ -87,7 +87,7 @@ def profile(request, username):
             at = False
         else:
             at = True
-    return render(request, 'br/profile.html', {'user': usr, 'comments': Comment.objects.filter(author=usr), 'at':at})
+    return render(request, 'br/profile.html', {'usr': usr, 'comments': Comment.objects.filter(author=usr), 'at':at})
 
 
 @login_required
