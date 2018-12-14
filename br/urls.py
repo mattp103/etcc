@@ -3,7 +3,7 @@ from . import views as v
 
 urlpatterns = [
     path('', v.index, name="index"),
-    path('reading/<plan>/<number>', v.reading, name="reading"),
+    path('reading/<number>', v.reading, name="reading"),
     # path('home/', v.home, name="home"),
     path('profile/<str:username>', v.profile, name="profile"),
     path('settings/', v.settings, name="settings"),

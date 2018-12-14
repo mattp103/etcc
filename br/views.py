@@ -51,7 +51,7 @@ def new_friend(request):
 
 
 @login_required
-def reading(request, plan, number):
+def reading(request, number):
     if request.method == 'POST':
         print('POST REQUEST')
         user = request.user
@@ -64,7 +64,7 @@ def reading(request, plan, number):
         return redirect('index')
 
     try:
-        return render(request, 'br/reading.html', {'reading': readings.rng(plan, int(number))[2], 'reference': readings.rng(plan, int(number))[1], 'copyright': readings.rng(plan, int(number))[0]})
+        return render(request, 'br/reading.html', {'reading': readings.rng('testplan1', int(number))[2], 'reference': readings.rng('testplan1', int(number))[1], 'copyright': readings.rng('testplan1', int(number))[0]})
     except:
         messages.error(request, "ERROR: Reading plan does not exist :(")
         return redirect('index')
