@@ -25,7 +25,7 @@ SECRET_KEY = '@p(-gf!xm(jzq0yw!ddpeuakf%)4sxg5r9(fpphw^%mj3vywvo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['meco.pythonanywhere.com']
 
 
 # Application definition
