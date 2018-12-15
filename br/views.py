@@ -63,7 +63,11 @@ def reading(request, number):
         return redirect('index')
 
     try:
-        return render(request, 'br/reading.html', {'reading': readings.rng('testplan1', int(number))[2], 'reference': readings.rng('testplan1', int(number))[1], 'copyright': readings.rng('testplan1', int(number))[0]})
+        return render(request, 'br/reading.html',
+        {'reading': readings.rng('testplan1', int(number))[2],
+        'reference': readings.rng('testplan1', int(number))[1],
+        'copyright': readings.rng('testplan1', int(number))[0],
+        'next': int(number) + 1})
     except:
         messages.error(request, "ERROR: Reading plan does not exist :(")
         return redirect('index')
