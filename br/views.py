@@ -14,7 +14,6 @@ def index(request):
         return render(request, 'br/index.html')
 
 
-
 @login_required
 def friend_view(request):
     user = request.user
@@ -120,10 +119,6 @@ def password(request):
             else:
                 messages.error(request, 'passwords did not match')
         else:
-            return messages.error(request, 'Your password was incorrect')
+            messages.error(request, 'Your password was incorrect')
 
     return render(request, 'br/password.html')
-
-# @login_required
-# def redirect(request):
-#     return redirect('index')
