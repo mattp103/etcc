@@ -60,13 +60,12 @@ def reading(request, number):
 
         Comment.objects.create(author=user, title=title, text=text, verse=verse)
 
-        return redirect('index')
-
     try:
         return render(request, 'br/reading.html',
         {'reading': readings.rng('testplan1', int(number))[2],
         'reference': readings.rng('testplan1', int(number))[1],
         'copyright': readings.rng('testplan1', int(number))[0],
+        'chapter': readings.rng('testplan1', int(number))[1].split(':')[0],
         'next': int(number) + 1})
     except:
         messages.error(request, "ERROR: Reading plan does not exist :(")
