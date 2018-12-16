@@ -32,7 +32,7 @@ def rd(ver,book,chp):
 
 
 def rng(plan, num):
-    folder = "br/plans/"+plan+"/reading.json"
+    folder = "br/static/br/"+plan+"/reading.json"
     json_file = open(folder, "r")
     decoded_json = json.loads(json_file.read())
     c = decoded_json["data2"]
