@@ -69,16 +69,47 @@ def reading(request, number):
 
 
 @login_required
+def comment_edit(request, c_pk):
+    comment = get_object_or_404(Comment, pk=c_pk)
+
+    if request.method == 'POST':
+        if comment.author == request.user:
+            comment.title = request.POST.get('title')
+            comment.verse = request.POST.get('verse')
+            comment.text = request.POST.get('text')
+            comment.save()
+
+            messages.success(request, 'Comment Updated')
+            return redirect('settings')
+
+
+    return render(request, 'br/comment_edit.html', {'comment': comment})
+
+
+@login_required
+def comment_delete(request, c_pk):
+    comment = get_object_or_404(Comment, pk=c_pk)
+
+    if request.method == 'POST':
+        if comment.author == request.user:
+            comment.delete()
+            messages.success(request, 'Comment Deleted')
+            return redirect('settings')
+
+    return render(request, 'br/comment_delete.html', {'comment': comment})
+
+
+@login_required
 def profile(request, username):
     usr = get_object_or_404(User, username=username)
     if request.method == 'POST':
         if usr != request.user:
             request.user.userprofile.friends.add(usr)
-            return redirect('index')
             messages.success(request, f'User {usr.username} added to friends!')
-        else:
             return redirect('index')
+        else:
             messages.error(request, "You cannot add yourself. Don't be lonely!")
+            return redirect('index')
 
     else:
         if usr in request.user.userprofile.friends.all():
@@ -96,10 +127,10 @@ def edit_profile(request):
             request.user.username = new_username
             request.user.save()
             messages.success(request, f'username updated to {new_username}')
+            return redirect('index')
         else:
             messages.error(request, 'Username with that name already exists')
 
-        return redirect('index')
 
     return render(request, 'br/profile_edit.html')
 
@@ -114,8 +145,8 @@ def password(request):
             if new_password == password_conf:
                 request.user.set_password(new_password)
                 request.user.save()
-                return redirect('login')
                 messages.success(request, 'Your password was changed')
+                return redirect('login')
             else:
                 messages.error(request, 'passwords did not match')
         else:

@@ -32,6 +32,8 @@
                     <h5 class="title">{{ comment.title }}</h5>
                     <h6 class="card-title">Verse: {{ comment.verse }}</h6>
                     <p class="card-text">{{ comment.text }}</p>
+                    <a href="/settings/edit/comment/{{ comment.id }}">edit</a>
+                    <a href="/settings/delete/comment/{{ comment.id }}" style="color:red;">delete</a>
                 </div>
             </div>
         </div>
