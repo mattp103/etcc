@@ -110,10 +110,11 @@ def password(request):
         cp = request.POST.get('cp')
         new_password = request.POST.get('password')
         password_conf = request.POST.get('password2')
-        if cp == request.user.password:
+        if request.user.check_password(cp):
             if new_password == password_conf:
-                request.user.password = new_password
-                return redirect('index')
+                request.user.set_password(new_password)
+                request.user.save()
+                return redirect('login')
                 messages.success(request, 'Your password was changed')
             else:
                 messages.error(request, 'passwords did not match')
