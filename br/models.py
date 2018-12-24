@@ -11,3 +11,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Reading(models.Model):
+    date = models.PositiveSmallIntegerField()
+    r1 = models.CharField(max_length=10)
+    r2 = models.CharField(max_length=10)
+    r3 = models.CharField(max_length=10)
+    r4 = models.CharField(max_length=10)

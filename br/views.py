@@ -61,11 +61,11 @@ def reading(request, number):
         Comment.objects.create(author=user, title=title, text=text, verse=verse)
 
     plan = 'testplan1'
-    try:
-        return render(request, 'br/reading.html', {'reading': readings.rng(plan, int(number))[2], 'reference': readings.rng(plan, int(number))[1], 'v': readings.rng(plan, int(number))[1].split(":")[0], 'copyright': readings.rng(plan, int(number))[0], 'next': int(number) + 1})
-    except:
-        messages.error(request, "ERROR: Reading plan does not exist :(")
-        return redirect('index')
+    # try:
+    return render(request, 'br/reading.html', {'reading': readings.rng(plan, int(number))[2], 'reference': readings.rng(plan, int(number))[1], 'v': readings.rng(plan, int(number))[1].split(":")[0], 'copyright': readings.rng(plan, int(number))[0], 'next': int(number) + 1})
+    # except:
+    #     messages.error(request, "ERROR: Reading plan does not exist :(")
+    #     return redirect('index')
 
 
 @login_required
