@@ -55,7 +55,7 @@
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ user.username }}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{% url 'settings' %}">Profile</a>
-                                <a class="dropdown-item" href="#">Log Out</a>
+                                <a class="dropdown-item" href="/logout">Log Out</a>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,11 @@
                                             </div>
                                             <div id="accordion22" class="collapse" data-parent="#accordion2">
                                                 <div class="card-body">
-                                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo eaque porro alias assumenda accusamus incidunt odio molestiae maxime quo atque in et quaerat, vel unde aliquam aperiam quidem consectetur omnis dicta officiis? Dolorum, error dolorem!
+                                                  <ul>
+                                                  {% for note in notes %}
+                                                    <li>{{ note.author.username }} -- {{ note.verse }} - {{ note.text }}</li>
+                                                  {% endfor %}
+                                                </ul>
                                                 </div>
                                             </div>
                                         </div>

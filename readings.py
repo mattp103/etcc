@@ -4,22 +4,22 @@ import os
 from time import strftime
 
 
-def passage(ver,book,chp,vrs):
-    url = "https://api.scripture.api.bible/v1/bibles/"+ver+"/verses/"+book+"."+chp+"."+vrs
-    header = {'api-key': '0bd22eae4a6c8ff30cbcd5ec72220900'}
-    response = requests.request("GET", url, headers=header)
-    parsed_json = json.loads(response.text)
-    data = json.loads(json.dumps(parsed_json['data']))
-    return data['content']
-
-
-def reference(ver,book,chp,vrs):
-    url = "https://api.scripture.api.bible/v1/bibles/"+ver+"/verses/"+book+"."+chp+"."+vrs
-    header = {'api-key': '0bd22eae4a6c8ff30cbcd5ec72220900'}
-    response = requests.request("GET", url, headers=header)
-    parsed_json = json.loads(response.text)
-    data = json.loads(json.dumps(parsed_json['data']))
-    return data['reference']
+# def passage(ver,book,chp,vrs):
+#     url = "https://api.scripture.api.bible/v1/bibles/"+ver+"/verses/"+book+"."+chp+"."+vrs
+#     header = {'api-key': '0bd22eae4a6c8ff30cbcd5ec72220900'}
+#     response = requests.request("GET", url, headers=header)
+#     parsed_json = json.loads(response.text)
+#     data = json.loads(json.dumps(parsed_json['data']))
+#     return data['content']
+#
+#
+# def reference(ver,book,chp,vrs):
+#     url = "https://api.scripture.api.bible/v1/bibles/"+ver+"/verses/"+book+"."+chp+"."+vrs
+#     header = {'api-key': '0bd22eae4a6c8ff30cbcd5ec72220900'}
+#     response = requests.request("GET", url, headers=header)
+#     parsed_json = json.loads(response.text)
+#     data = json.loads(json.dumps(parsed_json['data']))
+#     return data['reference']
 
 
 def rd(ver, book, chp):
@@ -44,6 +44,18 @@ def rad(ver, query):
     request_passages = request_data["passages"]
     read = request_passages[0]
     return read['copyright'], read['reference'], read['content']
+
+
+def jr(num):
+    folder = "br/static/br/plans/testplan1"
+    json_file = open(folder+"/reading.json", "r")
+    decoded_json = json.loads(json_file.read())
+    all_readings = decoded_json["data2"]
+    json_file.close()
+    today_reading = all_readings[int(strftime("%j"))]
+    current_reading = today_reading[num]
+
+    return current_reading
 
 
 def rng(plan, num):

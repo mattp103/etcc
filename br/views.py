@@ -3,8 +3,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
-from .models import Comment
+from .models import Comment, Reading
 import readings
+import json
 
 def index(request):
     user = request.user
@@ -58,11 +59,19 @@ def reading(request, number):
         text = request.POST.get('text')
         verse = request.POST.get('verse')
 
-        Comment.objects.create(author=user, title=title, text=text, verse=verse)
+        Comment.objects.create(author=user, title=title, text=text, verse=verse, reading=Reading.objects.get(r=readings.jr(int(number))))
+
+        return redirect('/reading/'+number)
 
     plan = 'testplan1'
     # try:
-    return render(request, 'br/reading.html', {'reading': readings.rng(plan, int(number))[2], 'reference': readings.rng(plan, int(number))[1], 'v': readings.rng(plan, int(number))[1].split(":")[0], 'copyright': readings.rng(plan, int(number))[0], 'next': int(number) + 1})
+    return render(request, 'br/reading.html',
+    {'reading': readings.rng(plan, int(number))[2],
+    'reference': readings.rng(plan, int(number))[1],
+    'v': readings.rng(plan, int(number))[1].split(":")[0],
+    'copyright': readings.rng(plan, int(number))[0],
+    'next': int(number) + 1,
+    'notes': Comment.objects.filter(author=request.user.userprofile.friends.all()[0], reading=Reading.objects.get(r=readings.jr(int(number))))})
     # except:
     #     messages.error(request, "ERROR: Reading plan does not exist :(")
     #     return redirect('index')
