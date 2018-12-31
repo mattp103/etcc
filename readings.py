@@ -2,6 +2,7 @@ import requests
 import json
 import os
 from time import strftime
+from django.core.cache import cache
 
 
 # def passage(ver,book,chp,vrs):
@@ -21,82 +22,69 @@ from time import strftime
 #     data = json.loads(json.dumps(parsed_json['data']))
 #     return data['reference']
 
+versions = {
+    "ASV": "06125adad2d5898a-01",
+    "engDRA": "179568874c45066f-01",
+    "enggnv": "c315fa9f71d4af3a-01",
+    "enKJVe": "de4e12af7f28f599-01",
+    "enKJVp": "de4e12af7f28f599-02",
+    "engojp": "bf8f1c7f3f9045a5-01",
+    "engRV": "40072c4a5aba4022-01",
+    "GNT": "61fd76eafa1577c2-02",
+    "GNTD": "61fd76eafa1577c2-01",
+    "T4T": "0bc8836afa7427fa-01",
+    "WEBE": "9879dbb7cfe39e4d-01",
+    "WEBC": "9879dbb7cfe39e4d-02",
+    "WEBO": "9879dbb7cfe39e4d-03",
+    "WEBP": "9879dbb7cfe39e4d-04",
+    "WEBBEE": "7142879509583d59-01",
+    "WEBBEC": "7142879509583d59-02",
+    "WEBBEO": "7142879509583d59-03",
+    "WEBBEP": "7142879509583d59-04",
+    "WMB": "f72b840c855f362c-04",
+    "WMBBEM": "04da588535d2f823-04"
+}
 
-def rd(ver, book, chp):
-    url = "https://api.scripture.api.bible/v1/bibles/"+ver+"/passages/"+book+"."+chp
-    header = {'api-key': '0bd22eae4a6c8ff30cbcd5ec72220900'}
-    response = requests.request("GET", url, headers=header)
-    parsed_json = json.loads(response.text)
-    print(parsed_json)
-    read = json.loads(json.dumps(parsed_json['data']))
-    print(read)
-    return read['copyright'], read['reference'], read['content']
 
-# this is the only good code :)
+def readings_today(plan):
+    key = plan+"readings"
+    if cache.get(key, "False") == "False":
+        cache.set(key, [jr(plan, 0), jr(plan, 1), jr(plan, 2), jr(plan, 3)], 600)
+        return cache.get(key)
+    else:
+        return cache.get(key)
+
+
 def rad(ver, query):
     url = "https://api.scripture.api.bible/v1/bibles/"+ver+"/search"
     header = {'api-key': '0bd22eae4a6c8ff30cbcd5ec72220900'}
     querystring = {"query": query, "limit": "1"}
     response = requests.request("GET", url, headers=header, params=querystring)
     parsed_json = json.loads(response.text)
-    print(parsed_json)
     request_data = json.loads(json.dumps(parsed_json['data']))
     request_passages = request_data["passages"]
     read = request_passages[0]
     return read['copyright'], read['reference'], read['content']
 
 
-def jr(num):
-    folder = "br/static/br/plans/testplan1"
+def jr(plan, num):
+    folder = "br/static/br/plans/" + plan
     json_file = open(folder+"/reading.json", "r")
     decoded_json = json.loads(json_file.read())
     all_readings = decoded_json["data2"]
     json_file.close()
     today_reading = all_readings[int(strftime("%j"))]
     current_reading = today_reading[num]
-
     return current_reading
 
 
-def rng(plan, num):
-    folder = "br/static/br/plans/"+plan
-    json_file = open(folder+"/reading.json", "r")
-    decoded_json = json.loads(json_file.read())
-    all_readings = decoded_json["data2"]
-    json_file.close()
-    today_reading = all_readings[int(strftime("%j"))]
-    print(today_reading)
-    current_reading = today_reading[num]
-    print(current_reading)
-    if os.path.isfile(folder+"/reading"+str(num)+".cache"):
-        try:
-            cache_file = open(folder + "/reading"+str(num)+".cache", "r")
-            cache_json = json.loads(cache_file.read())
-            reading_cache = cache_json[current_reading]
-            print("cache file read")
-            return reading_cache[0], reading_cache[1], reading_cache[2]
-        except:
-            cache_file = open(folder + "/reading"+str(num)+".cache", "w")
-            cache_data = rad("7142879509583d59-04", current_reading)
-            compiled_data = {current_reading: [cache_data[0], cache_data[1], cache_data[2]]}
-            json.dump(compiled_data, cache_file)
-            cache_file.close()
-            print("cache file written")
-            cache_output = compiled_data[current_reading]
-            return cache_output[0], cache_output[1], cache_output[2]
+def rng(plan, num, bible_ver):
+    current_reading = readings_today(plan)[num]
+    ver = versions[bible_ver]
+    key = plan + str(num) + ver
+    if cache.get(key, "False") == "False":
+        cache.set(key, rad(ver, current_reading), 3600)
+        return cache.get(key, ["", "<span class='text-red'>ERROR :(</span>", "An error occurred while fetching the reading. Please try again later or contact the developers <a href='/developers/'>here.</a>"])
     else:
-        cache_file = open(folder + "/reading" + str(num) + ".cache", "w")
-        cache_data = rad("7142879509583d59-04", current_reading)
-        compiled_data = {current_reading: [cache_data[0], cache_data[1], cache_data[2]]}
-        json.dump(compiled_data, cache_file)
-        cache_file.close()
-        print("cache file written v2")
-        return compiled_data[0], compiled_data[1], compiled_data[2]
+        return cache.get(key, ["", "<span class='text-red'>ERROR :(</span>", "An error occurred while fetching the reading. Please try again later or contact the developers <a  href=/'developers/'>here.</a>"])
 
-# print JOHN 3:16
-# print(reference("7142879509583d59-04","JHN","3","16"))
-# print(passage("7142879509583d59-04","JHN","3","16"))
-
-# print JOHN 3
-# print(chref("7142879509583d59-04","JHN","3"))
-# print(chapter("7142879509583d59-04","JHN","3"))

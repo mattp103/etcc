@@ -70,7 +70,25 @@
                         <h3><strong>{{ reference }}</strong></h3><br>
                         {{ reading|safe }}<br><br><br>
                         <h6>{{ copyright }}</h6>
-                        {% if next < 4 %}<a href="/reading/{{ next }}"><button type="button">Next Reading</button></a>{% endif %}
+                        {% if current_num < 3 %}<a href="/reading/{{ current_num }}"><button type="button">Next Reading</button></a>{% endif %}
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    {% if current_num > 0 %}<a class="page-link" href="/reading/{{ current_num|add:"-1" }}">Previous</a>
+                                    {% else %}<a class="page-link disabled">Previous</a>
+                                    {% endif %}
+                                </li>
+                                <li class="page-item"><a class="page-link" href="/reading/0">1</a></li>
+                                <li class="page-item"><a class="page-link" href="/reading/1">2</a></li>
+                                <li class="page-item"><a class="page-link" href="/reading/2">3</a></li>
+                                <li class="page-item"><a class="page-link" href="/reading/3">4</a></li>
+                                <li class="page-item">
+                                    {% if current_num < 3 %}<a class="page-link" href="/reading/{{ current_num|add:"1" }}">Next</a>
+                                    {% else %}<a class="page-link disabled">Next</a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </nav>
                         </div>
                     </div>
                     <div class="col-md-6" id="right">
@@ -137,6 +155,7 @@
                     </div>
                 </div>
                 <button class="btn btn-flat btn-success float-right" id="hidecomments">Hide Comments, Notes and Prayers</button>
+
             </div>
         </div>
         <!-- main content area end -->

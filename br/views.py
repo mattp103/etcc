@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
 from .models import Comment, Reading
 import readings
-import json
 
 def index(request):
     user = request.user
@@ -28,6 +27,18 @@ def friend_view(request):
 
 @login_required
 def settings(request):
+    if request.method == 'POST':
+        new_bible_ver = request.POST.get("bible_ver")
+        print(new_bible_ver)
+        if new_bible_ver in readings.versions:
+            print("YAY")
+            u = request.user.userprofile.bible_ver
+            u = new_bible_ver
+            u.update()
+            print("sucess")
+
+        else:
+            messages.error(request, f"No bible version with the name {new_bible_ver}")
     comments = Comment.objects.filter(author=request.user).order_by('-date_posted')
     return render(request, 'br/settings.html', {'comments': comments})
 
@@ -59,19 +70,19 @@ def reading(request, number):
         text = request.POST.get('text')
         verse = request.POST.get('verse')
 
-        Comment.objects.create(author=user, title=title, text=text, verse=verse, reading=Reading.objects.get(r=readings.jr(int(number))))
+        Comment.objects.create(author=user, title=title, text=text, verse=verse, reading=Reading.objects.get(r=readings.jr("testplan1", int(number))))
 
         return redirect('/reading/'+number)
-
-    plan = 'testplan1'
     # try:
+    print(request.user.userprofile.bible_ver)
+    reading_data = readings.rng("testplan1", int(number), request.user.userprofile.bible_ver)
     return render(request, 'br/reading.html',
-    {'reading': readings.rng(plan, int(number))[2],
-    'reference': readings.rng(plan, int(number))[1],
-    'v': readings.rng(plan, int(number))[1].split(":")[0],
-    'copyright': readings.rng(plan, int(number))[0],
-    'next': int(number) + 1,
-    'notes': Comment.objects.filter(author=request.user.userprofile.friends.all()[0], reading=Reading.objects.get(r=readings.jr(int(number))))})
+    {'reading': reading_data[2], 'reference': reading_data[1],
+     'v': reading_data[1].split(":")[0], 'copyright': reading_data[0],
+     'current_num': int(number)})
+
+    # 'notes': Comment.objects.filter(author=request.user.userprofile.friends.all()[0],
+    # reading=Reading.objects.get(r=readings.jr(int(number))))})
     # except:
     #     messages.error(request, "ERROR: Reading plan does not exist :(")
     #     return redirect('index')
@@ -90,7 +101,6 @@ def comment_edit(request, c_pk):
 
             messages.success(request, 'Comment Updated')
             return redirect('settings')
-
 
     return render(request, 'br/comment_edit.html', {'comment': comment})
 
@@ -125,7 +135,7 @@ def profile(request, username):
             at = False
         else:
             at = True
-    return render(request, 'br/profile.html', {'usr': usr, 'comments': Comment.objects.filter(author=usr), 'at':at})
+    return render(request, 'br/profile.html', {'usr': usr, 'comments': Comment.objects.filter(author=usr), 'at': at})
 
 
 @login_required
@@ -139,7 +149,6 @@ def edit_profile(request):
             return redirect('index')
         else:
             messages.error(request, 'Username with that name already exists')
-
 
     return render(request, 'br/profile_edit.html')
 

@@ -38,6 +38,36 @@
             </div>
         </div>
         {% endfor %}
+        <br>
+        <br>
+        <form method="post" class="form-group">
+        {% csrf_token %}
+            <label for="bible_ver"><h4><strong>Bible Version:</strong></h4></label>
+            <h6>Your current version is: {{ user.userprofile.bible_ver }}. To change it please select an option below</h6>
+            <select name="bible_ver" id="bible_ver" class="custom-select rounded-0" style="background-color: rgba(0, 0, 0, 0); border-color: rgba(0, 0, 0, 0.1)">
+              <option value="ASV">The Holy Bible, American Standard Version Bible</option>
+              <option value="engDRA">Douay-Rheims American 1899 The Holy Bible in English, Douay-Rheims American Edition of 1899, translated from the Latin Vulgate</option>
+              <option value="enggnv">Geneva Bible common</option>
+              <option value="enKJVe">King James (Authorised) Version Ecumenical</option>
+              <option value="enKJVp">King James (Authorised) Version Protestant</option>
+              <option value="engojp">JPS TaNaKH 1917 Jewish</option>
+              <option value="engRV">Revised Version 1885 Interconfessional</option>
+              <option value="GNT">Good News Translation Protestant Bible</option>
+              <option value="GNTD">Good News Translation (US Version) Catholic Interconfessional Bible</option>
+              <option value="T4T">Translation for Translators common</option>
+              <option value="WEBE">World English Bible Ecumenical</option>
+              <option value="WEBC">World English Bible Catholic</option>
+              <option value="WEBO">World English Bible Orthodox</option>
+              <option value="WEBP">World English Bible Protestant</option>
+              <option value="WEBBEE">World English Bible British Edition Ecumenical</option>
+              <option value="WEBBEC">World English Bible British Edition Catholic</option>
+              <option value="WEBBEO">World English Bible British Edition Orthodox</option>
+              <option value="WEBBEP">World English Bible British Edition Protestant</option>
+              <option value="WMB">World Messianic Bible Messianic</option>
+              <option value="WMBBEM">World Messianic Bible British Edition Messianic</option>
+            </select>
+            <button class="btn btn-flat" id="form_submit" type="submit" name="submit" value="Search">Submit <i class="ti-arrow-right"></i></button>
+        </form>
         </div>
     </div>
 </div>
