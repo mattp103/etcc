@@ -73,7 +73,7 @@ def jr(plan, num):
     decoded_json = json.loads(json_file.read())
     all_readings = decoded_json["data2"]
     json_file.close()
-    today_reading = all_readings[int(strftime("%j"))]
+    today_reading = all_readings[int(strftime("%j"))-1]
     current_reading = today_reading[num]
     return current_reading
 
@@ -87,4 +87,3 @@ def rng(plan, num, bible_ver):
         return cache.get(key, ["", "<span class='text-red'>ERROR :(</span>", "An error occurred while fetching the reading. Please try again later or contact the developers <a href='/developers/'>here.</a>"])
     else:
         return cache.get(key, ["", "<span class='text-red'>ERROR :(</span>", "An error occurred while fetching the reading. Please try again later or contact the developers <a  href=/'developers/'>here.</a>"])
-

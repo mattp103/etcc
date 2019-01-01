@@ -32,9 +32,9 @@ def settings(request):
         print(new_bible_ver)
         if new_bible_ver in readings.versions:
             print("YAY")
-            u = request.user.userprofile.bible_ver
-            u = new_bible_ver
-            u.update()
+            u = request.user.userprofile
+            u.bible_ver = new_bible_ver
+            u.save()
             print("sucess")
 
         else:
