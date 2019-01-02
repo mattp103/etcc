@@ -21,3 +21,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Progress(models.Model):
+    usr = models.ForeignKey(User, on_delete=models.CASCADE)
+    r0 = models.BooleanField()
+    r1 = models.BooleanField()
+    r2 = models.BooleanField()
+    r3 = models.BooleanField()

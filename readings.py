@@ -4,24 +4,6 @@ import os
 from time import strftime
 from django.core.cache import cache
 
-
-# def passage(ver,book,chp,vrs):
-#     url = "https://api.scripture.api.bible/v1/bibles/"+ver+"/verses/"+book+"."+chp+"."+vrs
-#     header = {'api-key': '0bd22eae4a6c8ff30cbcd5ec72220900'}
-#     response = requests.request("GET", url, headers=header)
-#     parsed_json = json.loads(response.text)
-#     data = json.loads(json.dumps(parsed_json['data']))
-#     return data['content']
-#
-#
-# def reference(ver,book,chp,vrs):
-#     url = "https://api.scripture.api.bible/v1/bibles/"+ver+"/verses/"+book+"."+chp+"."+vrs
-#     header = {'api-key': '0bd22eae4a6c8ff30cbcd5ec72220900'}
-#     response = requests.request("GET", url, headers=header)
-#     parsed_json = json.loads(response.text)
-#     data = json.loads(json.dumps(parsed_json['data']))
-#     return data['reference']
-
 versions = {
     "ASV": "06125adad2d5898a-01",
     "engDRA": "179568874c45066f-01",
