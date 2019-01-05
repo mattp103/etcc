@@ -52,7 +52,7 @@
                                 <a href="{% url 'index' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Home</span></a>
                             </li>
                             <li>
-                                <a href="/reading/0" aria-expanded="true"><i class="ti-dashboard"></i><span>Reading</span></a>
+                                <a href="/reading/0" aria-expanded="true"><i class="ti-book"></i><span>Readings</span></a>
                             </li>
                             <li>
                                 <a href="/profile/{{ user.username }}" aria-expanded="true"><i class="ti-user"></i><span>Profile</span></a>
@@ -70,7 +70,7 @@
         </div>
         <!-- sidebar menu area end -->
         <!-- main content area start -->
-        <div class="main-content">
+        <div class="main-content bg-white">
             <!-- header area start -->
             <div class="header-area">
                 <div class="row align-items-center">
@@ -96,7 +96,7 @@
                             <li class="dsettings-btn">
                                 <i class="ti-user"></i>
                             </li>
-                            <li class="settings-btn">
+                            <li class="dsettings-btn">
                                <i class="ti-settings"></i>
                             </li>
                         </ul>
@@ -131,20 +131,25 @@
             {% if messages %}
                 {% for message in messages %}
                     {% if 'error' in message.tags %}
-                        <div class="alert alert-danger">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span></button>
                         </div>
                     {% else %}
-                        <div class="alert alert-{{ message.tags }}">
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
                             {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span></button>
                         </div>
                     {% endif %}
 
                 {% endfor %}
             {% endif %}
-            <div class="main-content-inner login-bg">
+            <!-- <div class="main-content-inner login-bg"> -->
+            <div class="main-content-inner bg-white">
             {% block content %}
-
+              {% for reading in readings %}
+                {{ reading }}
+              {% endfor %}
             {% endblock %}
             </div>
         </div>

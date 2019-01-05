@@ -9,7 +9,7 @@ import readings
 def index(request):
     user = request.user
     if user.is_authenticated:
-        return render(request, 'br/home.html')
+        return render(request, 'br/home.html', {'readings': readings.readings_today("testplan1")})
     else:
         return render(request, 'br/index.html')
 
@@ -29,14 +29,10 @@ def friend_view(request):
 def settings(request):
     if request.method == 'POST':
         new_bible_ver = request.POST.get("bible_ver")
-        print(new_bible_ver)
         if new_bible_ver in readings.versions:
-            print("YAY")
             u = request.user.userprofile
             u.bible_ver = new_bible_ver
             u.save()
-            print("sucess")
-
         else:
             messages.error(request, f"No bible version with the name {new_bible_ver}")
     comments = Comment.objects.filter(author=request.user).order_by('-date_posted')
@@ -63,23 +59,25 @@ def new_friend(request):
 
 @login_required
 def reading(request, number):
+    reading_data = readings.rng("testplan1", int(number), request.user.userprofile.bible_ver)
     if request.method == 'POST':
         print('POST REQUEST')
         user = request.user
         title = request.POST.get('title')
         text = request.POST.get('text')
-        verse = request.POST.get('verse')
+        if request.POST.get('verse') > reading_data[1].split("-")[-1]:
+            messages.error(request, "Invalid Verse")
+            return redirect('/')
+        verse = reading_data[1].split(":")[0] + ":" + request.POST.get('verse')
 
         Comment.objects.create(author=user, title=title, text=text, verse=verse, reading=Reading.objects.get(r=readings.jr("testplan1", int(number))))
 
         return redirect('/reading/'+number)
     # try:
-    print(request.user.userprofile.bible_ver)
-    reading_data = readings.rng("testplan1", int(number), request.user.userprofile.bible_ver)
     return render(request, 'br/reading.html',
     {'reading': reading_data[2], 'reference': reading_data[1],
-     'v': reading_data[1].split(":")[0], 'copyright': reading_data[0],
-     'current_num': int(number)})
+     'v': reading_data[1].split(":")[0], 'lv': reading_data[1].split("-")[-1],
+      'copyright': reading_data[0], 'current_num': int(number)})
 
     # 'notes': Comment.objects.filter(author=request.user.userprofile.friends.all()[0],
     # reading=Reading.objects.get(r=readings.jr(int(number))))})
@@ -127,15 +125,18 @@ def profile(request, username):
             messages.success(request, f'User {usr.username} added to friends!')
             return redirect('index')
         else:
-            messages.error(request, "You cannot add yourself. Don't be lonely!")
+            messages.error(request, "You can't add yourself. Don't be lonely!")
             return redirect('index')
-
     else:
         if usr in request.user.userprofile.friends.all():
             at = False
         else:
             at = True
-    return render(request, 'br/profile.html', {'usr': usr, 'comments': Comment.objects.filter(author=usr), 'at': at})
+        if usr == request.user:
+            cp = True
+        else:
+            cp = False
+    return render(request, 'br/profile.html', {'usr': usr, 'comments': Comment.objects.filter(author=usr), 'at': at, 'cp': cp})
 
 
 @login_required
