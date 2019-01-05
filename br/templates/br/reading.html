@@ -113,11 +113,26 @@
                     <div class="reading-col">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Comments, Notes and Prayers</h4>
+                                <h4 class="header-title">Notes</h4>
                                 <div id="accordion2" class="according accordion-s2">
                                     <div class="card">
                                         <div class="card-header">
-                                            <a class="card-link" data-toggle="collapse" href="#accordion21">Comments</a>
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#accordion22">All Notes</a>
+                                        </div>
+                                        <div id="accordion22" class="collapse" data-parent="#accordion2">
+                                            <div class="card-body">
+                                                <ul>
+                                                    {% for note in notes %}
+                                                        <li>{{ note.author.username }}: {{ note.title }}<br>
+                                                        {{ note.verse }} - {{ note.text }}</li><br>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <a class="card-link" data-toggle="collapse" href="#accordion21">Create Note</a>
                                         </div>
                                         <div id="accordion21" class="collapse show" data-parent="#accordion2">
                                             <div class="card-body">
@@ -135,7 +150,7 @@
                                                         </div>
                                                         <input class="form-control" type="number" id="verse" name="verse" min="1" max="{{ lv }}">
                                                     </div>
-                                                    <label for="comment">Comment</label>
+                                                    <label for="comment">Note</label>
                                                     <textarea form="form" class="form-control" rows="5" id="comment" name="text"></textarea>
                                                     <br>
                                                     <div class="submit-btn-area m-3">
@@ -146,31 +161,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <a class="collapsed card-link" data-toggle="collapse" href="#accordion22">Notes</a>
-                                        </div>
-                                        <div id="accordion22" class="collapse" data-parent="#accordion2">
-                                            <div class="card-body">
-                                              <ul>
-                                                Nothing here yet!
-                                              {% for note in notes %}
-                                                <li>{{ note.author.username }} -- {{ note.verse }} - {{ note.text }}</li>
-                                              {% endfor %}
-                                            </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <a class="collapsed card-link" data-toggle="collapse" href="#accordion23">Prayers</a>
-                                        </div>
-                                        <div id="accordion23" class="collapse" data-parent="#accordion2">
-                                            <div class="card-body">
-                                                Nothing here yet!
-                                            </div>
-                                        </div>
-                                    </div>
+
+
+
                                 </div>
                             </div>
                         </div>

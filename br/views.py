@@ -77,7 +77,8 @@ def reading(request, number):
     return render(request, 'br/reading.html',
     {'reading': reading_data[2], 'reference': reading_data[1],
      'v': reading_data[1].split(":")[0], 'lv': reading_data[1].split("-")[-1],
-      'copyright': reading_data[0], 'current_num': int(number)})
+      'copyright': reading_data[0], 'current_num': int(number),
+      'notes': Comment.objects.filter(reading=Reading.objects.get(r=readings.jr("testplan1", int(number))))})
 
     # 'notes': Comment.objects.filter(author=request.user.userprofile.friends.all()[0],
     # reading=Reading.objects.get(r=readings.jr(int(number))))})
