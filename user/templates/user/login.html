@@ -46,9 +46,9 @@
                     </div>
                     <div class="login-form-body">
                         <div class="form-gp">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" id="exampleInputEmail1" name="email">
-                            <i class="ti-email"></i>
+                            <label for="exampleInputName1">Username</label>
+                            <input type="text" id="exampleInputName1" name="username">
+                            <i class="ti-user"></i>
                         </div>
                         <div class="form-gp">
                             <label for="exampleInputPassword1">Password</label>
@@ -68,9 +68,6 @@
                         </div>
                         <div class="submit-btn-area">
                             <div class="login-other row mt-4">
-                                <div class="col-6">
-                                    <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
-                                </div>
                                 <div class="col-6">
                                     <a class="google-login" href="{% url 'social:begin' 'google-oauth2' %}">Sign up with <i class="fa fa-google"></i></a>
                                 </div>

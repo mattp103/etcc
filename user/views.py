@@ -6,13 +6,13 @@ from django.contrib import messages
 
 def signin(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = User.objects.get(email=email)
+        user = User.objects.get(username=username)
 
         if user.check_password(password):
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
         return redirect('index')
 
@@ -26,7 +26,7 @@ def signup(request):
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
 
-        if len(User.objects.filter(username=username)) == 0 and password1 == password2:
+        if len(User.objects.filter(username=username)) == 0 and len(User.objects.filter(email=email)) == 0 and password1 == password2:
 
             if len(name.split(' ')) == 1:
                 first_name = name.split(' ')[0]
@@ -39,7 +39,7 @@ def signup(request):
                 user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password1)
 
 
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
             for reading in Reading.objects.all():
                 Progress.objects.create(usr=user, reading=reading, status=False)
