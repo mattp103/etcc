@@ -8,5 +8,5 @@ urlpatterns = [
     path('login/', uv.signin, name="login"),
     path('register/', uv.signup, name="register"),
     path('logout/', uv.signout, name="logout"),
-    url(r'^auth/', include('social_django.urls', namespace='social')),
+    path('auth/', include('social_django.urls', namespace='social')),
 ]
