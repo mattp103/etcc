@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'br',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -84,6 +87,13 @@ CACHES = {
         }
     }
 }
+
+
+# Google Sign in etc.
+# Ethan if u need any help :)
+
+OCIAL_AUTH_GOOGLE_OAUTH2_KEY ='654588663348-rf54ucnch947oelm98710eepr4lcbagg.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Gha7JPNK6MIPQ95R2q04WdxQ'
 
 
 # Database

@@ -67,6 +67,14 @@
                             </div>
                         </div>
                         <div class="submit-btn-area">
+                            <div class="login-other row mt-4">
+                                <div class="col-6">
+                                    <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
+                                </div>
+                                <div class="col-6">
+                                    <a class="google-login" href="{% url 'social:begin' 'google-oauth2' %}">Sign up with <i class="fa fa-google"></i></a>
+                                </div>
+                            </div>
                             <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
                         </div>
                         <div class="form-footer text-center mt-5">
