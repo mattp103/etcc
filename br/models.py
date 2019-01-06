@@ -25,7 +25,5 @@ class Comment(models.Model):
 
 class Progress(models.Model):
     usr = models.ForeignKey(User, on_delete=models.CASCADE)
-    r0 = models.BooleanField()
-    r1 = models.BooleanField()
-    r2 = models.BooleanField()
-    r3 = models.BooleanField()
+    reading = models.ForeignKey(Reading, on_delete=models.CASCADE, null=True)
+    status = models.BooleanField(default=False)
