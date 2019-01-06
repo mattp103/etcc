@@ -26,20 +26,25 @@ def signup(request):
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
 
-        if len(name.split(' ')) == 1:
-            first_name = name.split(' ')[0]
-            user = User.objects.create_user(username=username, first_name=first_name, email=email, password=password1)
+        if len(User.objects.filter(username=username)) == 0 and password1 == password2:
 
-        elif len(name.split(' ')) > 1:
-            first_name = name.split(' ')[0]
-            last_name = name.split(' ')[len(name.split(' '))-1]
+            if len(name.split(' ')) == 1:
+                first_name = name.split(' ')[0]
+                user = User.objects.create_user(username=username, first_name=first_name, email=email, password=password1)
 
-            user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password1)
+            elif len(name.split(' ')) > 1:
+                first_name = name.split(' ')[0]
+                last_name = name.split(' ')[len(name.split(' '))-1]
+
+                user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password1)
 
 
-        login(request, user)
+            login(request, user)
 
-        return redirect('index')
+            return redirect('index')
+
+        else:
+            messages.error(request, "Error. Please make sure all the fields are filled in and valid.")
 
     return render(request, 'user/register.html')
 
