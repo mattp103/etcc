@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
 from .models import Comment, Reading
 import readings
+from time import strftime
 
 def index(request):
     user = request.user
@@ -70,7 +71,7 @@ def reading(request, number):
             return redirect('/')
         verse = reading_data[1].split(":")[0] + ":" + request.POST.get('verse')
 
-        Comment.objects.create(author=user, title=title, text=text, verse=verse, reading=Reading.objects.get(r=readings.jr("testplan1", int(number))))
+        Comment.objects.create(author=user, title=title, text=text, verse=verse, reading=Reading.objects.get(date=int(strftime("%j"))-1, r=readings.jr("testplan1", int(number))))
 
         return redirect('/reading/'+number)
     # try:
@@ -78,7 +79,7 @@ def reading(request, number):
     {'reading': reading_data[2], 'reference': reading_data[1],
      'v': reading_data[1].split(":")[0], 'lv': reading_data[1].split("-")[-1],
       'copyright': reading_data[0], 'current_num': int(number),
-      'notes': Comment.objects.filter(reading=Reading.objects.get(r=readings.jr("testplan1", int(number))))})
+      'notes': Comment.objects.filter(reading=Reading.objects.get(date=int(strftime("%j"))-1, r=readings.jr("testplan1", int(number))))})
 
     # 'notes': Comment.objects.filter(author=request.user.userprofile.friends.all()[0],
     # reading=Reading.objects.get(r=readings.jr(int(number))))})

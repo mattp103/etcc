@@ -50,7 +50,7 @@ def rad(ver, query):
 
 
 def jr(plan, num):
-    folder = "br/static/br/plans/" + plan
+    folder = "/home/meco/etcc/br/static/br/plans/" + plan
     json_file = open(folder+"/reading.json", "r")
     decoded_json = json.loads(json_file.read())
     all_readings = decoded_json["data2"]
