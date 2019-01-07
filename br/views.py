@@ -138,7 +138,7 @@ def profile(request, username):
             cp = True
         else:
             cp = False
-    return render(request, 'br/profile.html', {'usr': usr, 'comments': Comment.objects.filter(author=usr), 'at': at, 'cp': cp})
+    return render(request, 'br/profile.html', {'usr': usr, 'comments': Comment.objects.filter(author=usr).order_by('-date_posted'), 'at': at, 'cp': cp})
 
 
 @login_required

@@ -42,7 +42,7 @@
                   <div class="col-lg-4 col-md-6 mt-3">
                       <div class="card card-bordered">
                           <div class="card-body">
-                              <h5 class="title">{{ comment.title }}</h5>
+                              <h5 class="title">{{ comment.title }}</h5><strong>{{ comment.date_posted }}</strong>
                               <h6 class="card-title">Verse: {{ comment.verse }}</h6>
                               <p class="card-text">{{ comment.text }}</p>
                           </div>
@@ -57,33 +57,5 @@
         </div>
     </div>
 </div>
-<!-- <div class="row rounded settings-bg settings-bd">
-    <div class="col-12 trans-bg settings-bd" style="background-color: rgba(243, 248, 251, 0) !important;">
-        <div class="grid-col trans-bg settings-bd"><h1><u><strong>{{ usr.username }}</strong></u></h1>
-        {% if at %}
-        <br>
-        <br>
-        <br>
-        <h4><strong>Add {{ usr.username }} to friends?</strong></h4>
-        <form method="post">{% csrf_token %}<button class="text-white btn btn-flat" type="submit" style="background-color: rgba(0,0,0,0.1)"><h4>Add  <i class="fa fa-plus"></i></h4></button></form>
-        <br>
-        {% endif %}
-        <br>
-        <br>
-        <h4><strong>Comments:</strong></h4>
-        {% for comment in comments %}
-        <div class="col-lg-4 col-md-6 mt-3">
-            <div class="card card-bordered">
-                <div class="card-body">
-                    <h5 class="title">{{ comment.title }}</h5>
-                    <h6 class="card-title">Verse: {{ comment.verse }}</h6>
-                    <p class="card-text">{{ comment.text }}</p>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        </div>
-    </div>
-</div> -->
 
 {% endblock %}
