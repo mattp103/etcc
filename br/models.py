@@ -27,3 +27,6 @@ class Progress(models.Model):
     usr = models.ForeignKey(User, on_delete=models.CASCADE)
     reading = models.ForeignKey(Reading, on_delete=models.CASCADE, null=True)
     status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.status)

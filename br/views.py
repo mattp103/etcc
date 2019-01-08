@@ -3,14 +3,22 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
-from .models import Comment, Reading
+from .models import Comment, Reading, Progress
 import readings
 from time import strftime
 
 def index(request):
     user = request.user
     if user.is_authenticated:
-        return render(request, 'br/home.html', {'readings': readings.readings_today("testplan1")})
+        t_progs = []
+        d = int(strftime("%j"))-1
+        for reading in Reading.objects.filter(date=d):
+            po = Progress.objects.get(usr=request.user, reading=reading)
+            t_progs.append(po.status)
+
+        z = zip(t_progs, readings.readings_today("testplan1"))
+
+        return render(request, 'br/home.html', {'readings': readings.readings_today("testplan1"), 't_p': t_progs, 'zp': z})
     else:
         return render(request, 'br/index.html')
 
@@ -61,7 +69,7 @@ def new_friend(request):
 @login_required
 def reading(request, number):
     reading_data = readings.rng("testplan1", int(number), request.user.userprofile.bible_ver)
-    if request.method == 'POST':
+    if 'armel' in request.POST:
         print('POST REQUEST')
         user = request.user
         title = request.POST.get('title')
@@ -74,12 +82,27 @@ def reading(request, number):
         Comment.objects.create(author=user, title=title, text=text, verse=verse, reading=Reading.objects.get(date=int(strftime("%j"))-1, r=readings.jr("testplan1", int(number))))
 
         return redirect('/reading/'+number)
+
+    elif 'glen' in request.POST:
+        print("yep")
+        r = Progress.objects.get(usr=request.user, reading=Reading.objects.get(date=int(strftime("%j"))-1, r=readings.jr("testplan1", int(number))))
+        print("got progress object")
+        r.status = True
+        print("updated status")
+        print(r.status)
+        r.save()
+        print("saved p object")
+        print(r.status)
+
+        return redirect('/reading/' + str(int(number)+1))
+
     # try:
     return render(request, 'br/reading.html',
     {'reading': reading_data[2], 'reference': reading_data[1],
      'v': reading_data[1].split(":")[0], 'lv': reading_data[1].split("-")[-1],
       'copyright': reading_data[0], 'current_num': int(number),
       'notes': Comment.objects.filter(reading=Reading.objects.get(date=int(strftime("%j"))-1, r=readings.jr("testplan1", int(number))))})
+
 
     # 'notes': Comment.objects.filter(author=request.user.userprofile.friends.all()[0],
     # reading=Reading.objects.get(r=readings.jr(int(number))))})
@@ -174,3 +197,8 @@ def password(request):
             messages.error(request, 'Your password was incorrect')
 
     return render(request, 'br/password.html')
+
+
+def progress(request):
+    if request.method == 'POST':
+        pass

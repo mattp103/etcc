@@ -24,6 +24,14 @@
     <link rel="stylesheet" href="{% static 'br/assets/css/responsive.css' %}">
     <!-- modernizr css -->
     <script src="{% static 'br/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <style>
+    .done{
+      color: #00F!important;
+    }
+    .notdone{
+      color: #F00!important;
+    }
+    </style>
 </head>
 
 <body>
@@ -147,8 +155,8 @@
             <!-- <div class="main-content-inner login-bg"> -->
             <div class="main-content-inner bg-white">
             {% block content %}
-              {% for reading in readings %}
-                {{ reading }}
+              {% for t_p, r in zp %}
+                <h4 class="reading-title"><a href="reading/{{ forloop.counter|add:"-1" }}" style="color: black;color: #414141!important;font-family: proxima-nova, sans-serif;font-weight: 700;font-style: normal;text-transform: uppercase;">{{ r }}</a>{% autoescape off %} {{ t_p|yesno:"<i class='fa fa-check done'></i>,<i class='fa fa-times notdone'></i>" }} {% endautoescape %}</h4><br>
               {% endfor %}
             {% endblock %}
             </div>

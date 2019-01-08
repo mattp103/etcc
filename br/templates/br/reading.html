@@ -91,17 +91,38 @@
                                     {% else %}<a class="page-link disabled">Previous</a>
                                     {% endif %}
                                 </li>
-                                <li class="page-item {% if current_num == 0 %} active {% endif %}"><a class="page-link" href="/reading/0">1</a></li>
-                                <li class="page-item {% if current_num == 1 %} active {% endif %}"><a class="page-link" href="/reading/1">2</a></li>
-                                <li class="page-item {% if current_num == 2 %} active {% endif %}"><a class="page-link" href="/reading/2">3</a></li>
-                                <li class="page-item {% if current_num == 3 %} active {% endif %}"><a class="page-link" href="/reading/3">4</a></li>
+                                <li class="page-item {% if current_num == 0 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %}><a class="page-link" href="/reading/0">1</a></li>
+                                <li class="page-item {% if current_num == 1 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %}><a class="page-link" href="/reading/1">2</a></li>
+                                <li class="page-item {% if current_num == 2 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %}><a class="page-link" href="/reading/2">3</a></li>
+                                <li class="page-item {% if current_num == 3 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %}><a class="page-link" href="/reading/3">4</a></li>
                                 <li class="page-item">
-                                    {% if current_num < 3 %}<a class="page-link" href="/reading/{{ current_num|add:"1" }}">Next</a>
+                                    {% if current_num < 3 %}<a class="page-link" data-toggle="modal" data-target="#chapterCheck">Next</a>
                                     {% else %}<a class="page-link disabled">Next</a>
                                     {% endif %}
                                 </li>
                             </ul>
                         </nav>
+                        <button type="button" class="btn btn-primary btn-flat btn-lg mt-3" data-toggle="modal" data-target="#chapterCheck">Launch demo modal</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="chapterCheck">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius voluptates explicabo natus nobis, aperiam placeat aliquid nisi ut exercitationem dolor quisquam nam tempora voluptatem. Unde dignissimos est aliquid quidem porro dolorum ipsam suscipit animi quas, debitis ea, sunt quo distinctio doloribus eveniet dolores tempore delectus voluptatum! Possimus earum asperiores animi.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal end -->
+                        <form method="post">{% csrf_token %}<button class="btn btn-flat btn-green" name="glen" type="submit" id="submit" value="Finished with this chapter?"></button></form>
                       </div>
                     </div>
                   <div class="col-md-4"></div>
@@ -154,7 +175,7 @@
                                                     <textarea form="form" class="form-control" rows="5" id="comment" name="text"></textarea>
                                                     <br>
                                                     <div class="submit-btn-area m-3">
-                                                        <button id="form_submit" type="submit">Create <i class="ti-arrow-right"></i></button>
+                                                        <button id="form_submit" type="submit" name="armel" value="create">Create <i class="ti-arrow-right"></i></button>
                                                     </div>
                                                     </div>
                                                 </form>
@@ -175,6 +196,7 @@
 
             </div>
         </div>
+
         <!-- main content area end -->
         <!-- footer area start-->
         <footer>
