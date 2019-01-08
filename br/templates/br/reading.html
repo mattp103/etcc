@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{% static 'br/assets/css/responsive.css' %}">
     <!-- modernizr css -->
     <script src="{% static 'br/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <script>var p = {{ current_num }}</script>
     <style>
     #left, p {
       font-family: acumin-pro, sans-serif!important;
@@ -91,10 +92,10 @@
                                     {% else %}<a class="page-link disabled">Previous</a>
                                     {% endif %}
                                 </li>
-                                <li class="page-item {% if current_num == 0 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %}><a class="page-link" href="/reading/0">1</a></li>
-                                <li class="page-item {% if current_num == 1 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %}><a class="page-link" href="/reading/1">2</a></li>
-                                <li class="page-item {% if current_num == 2 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %}><a class="page-link" href="/reading/2">3</a></li>
-                                <li class="page-item {% if current_num == 3 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %}><a class="page-link" href="/reading/3">4</a></li>
+                                <li class="page-item {% if current_num == 0 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="p=0;"><a class="page-link">1</a></li>
+                                <li class="page-item {% if current_num == 1 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="p=1;"><a class="page-link">2</a></li>
+                                <li class="page-item {% if current_num == 2 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="p=2;"><a class="page-link">3</a></li>
+                                <li class="page-item {% if current_num == 3 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="p=3;"><a class="page-link">4</a></li>
                                 <li class="page-item">
                                     {% if current_num < 3 %}<a class="page-link" data-toggle="modal" data-target="#chapterCheck">Next</a>
                                     {% else %}<a class="page-link disabled">Next</a>
@@ -102,27 +103,28 @@
                                 </li>
                             </ul>
                         </nav>
-                        <button type="button" class="btn btn-primary btn-flat btn-lg mt-3" data-toggle="modal" data-target="#chapterCheck">Launch demo modal</button>
                         <!-- Modal -->
                         <div class="modal fade" id="chapterCheck">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Modal title</h5>
+                                        <h5 class="modal-title">Finished with this chapter?</h5>
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                     </div>
                                     <div class="modal-body">
                                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius voluptates explicabo natus nobis, aperiam placeat aliquid nisi ut exercitationem dolor quisquam nam tempora voluptatem. Unde dignissimos est aliquid quidem porro dolorum ipsam suscipit animi quas, debitis ea, sunt quo distinctio doloribus eveniet dolores tempore delectus voluptatum! Possimus earum asperiores animi.</p>
                                     </div>
+                                    <script>
+                                      document.getElementById("redirect").setAttribute('value', p);
+                                    </script>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <form method="post" name="save">{% csrf_token %}<input name="redirect" id="redirect" type="text"><button class="btn btn-flat btn-green" name="glen" type="submit" id="submit" value="Finished with this chapter?">Finished with this chapter?</button></form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Modal end -->
-                        <form method="post">{% csrf_token %}<button class="btn btn-flat btn-green" name="glen" type="submit" id="submit" value="Finished with this chapter?"></button></form>
                       </div>
                     </div>
                   <div class="col-md-4"></div>

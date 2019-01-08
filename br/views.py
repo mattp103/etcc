@@ -94,7 +94,10 @@ def reading(request, number):
         print("saved p object")
         print(r.status)
 
-        return redirect('/reading/' + str(int(number)+1))
+        n = request.POST.get('redirect')
+        print(n)
+
+        return redirect('/reading/' + n)
 
     # try:
     return render(request, 'br/reading.html',
