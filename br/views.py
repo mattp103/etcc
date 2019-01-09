@@ -10,8 +10,14 @@ from time import strftime
 def index(request):
     user = request.user
     if user.is_authenticated:
-        t_progs = []
         d = int(strftime("%j"))-1
+        # checks for progress objects
+        if len(Progress.objects.filter(usr=user, date=d)) == 0:
+            pass
+
+
+        t_progs = []
+
         for reading in Reading.objects.filter(date=d):
             po = Progress.objects.get(usr=request.user, reading=reading)
             t_progs.append(po.status)
@@ -206,8 +212,3 @@ def password(request):
             messages.error(request, 'Your password was incorrect')
 
     return render(request, 'br/password.html')
-
-
-def progress(request):
-    if request.method == 'POST':
-        pass
