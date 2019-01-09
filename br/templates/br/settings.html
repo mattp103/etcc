@@ -21,7 +21,7 @@
         <br>
         <br>
         <h4><strong>Username:</strong></h4>
-        <h5>{{ user.username }} <span class="m-4"></span><a class="text-white" href="{% url 'profile-edit' %}">Edit Username  <i class="fa fa-edit"></i> </a></h5>
+        <h5>{{ user.username }} <span class="m-4"></span><a href="{% url 'profile-edit' %}">Edit Username  <i class="fa fa-edit"></i> </a></h5>
         <br>
         <br>
         <h4><strong>Your Comments:</strong></h4>
@@ -45,28 +45,36 @@
             <label for="bible_ver"><h4><strong>Bible Version:</strong></h4></label>
             <h6>Your current version is: {{ user.userprofile.bible_ver }}. To change it please select an option below</h6>
             <select name="bible_ver" id="bible_ver" class="custom-select rounded-0" style="background-color: rgba(0, 0, 0, 0); border-color: rgba(0, 0, 0, 0.1)">
-              <option value="ASV">The Holy Bible, American Standard Version Bible</option>
-              <option value="engDRA">Douay-Rheims American 1899 The Holy Bible in English, Douay-Rheims American Edition of 1899, translated from the Latin Vulgate</option>
-              <option value="enggnv">Geneva Bible common</option>
-              <option value="enKJVe">King James (Authorised) Version Ecumenical</option>
-              <option value="enKJVp">King James (Authorised) Version Protestant</option>
-              <option value="engojp">JPS TaNaKH 1917 Jewish</option>
-              <option value="engRV">Revised Version 1885 Interconfessional</option>
-              <option value="GNT">Good News Translation Protestant Bible</option>
-              <option value="GNTD">Good News Translation (US Version) Catholic Interconfessional Bible</option>
-              <option value="T4T">Translation for Translators common</option>
-              <option value="WEBE">World English Bible Ecumenical</option>
-              <option value="WEBC">World English Bible Catholic</option>
-              <option value="WEBO">World English Bible Orthodox</option>
-              <option value="WEBP">World English Bible Protestant</option>
-              <option value="WEBBEE">World English Bible British Edition Ecumenical</option>
-              <option value="WEBBEC">World English Bible British Edition Catholic</option>
-              <option value="WEBBEO">World English Bible British Edition Orthodox</option>
-              <option value="WEBBEP">World English Bible British Edition Protestant</option>
-              <option value="WMB">World Messianic Bible Messianic</option>
-              <option value="WMBBEM">World Messianic Bible British Edition Messianic</option>
+              <option value="ASV" {% if user.userprofile.bible_ver == "ASV"%}selected=""{% endif %}>The Holy Bible, American Standard Version Bible</option>
+              <option value="engDRA" {% if user.userprofile.bible_ver == "engDRA"%}selected=""{% endif %}>Douay-Rheims American 1899 The Holy Bible in English, Douay-Rheims American Edition of 1899, translated from the Latin Vulgate</option>
+              <option value="enggnv" {% if user.userprofile.bible_ver == "enggnv"%}selected=""{% endif %}>Geneva Bible common</option>
+              <option value="enKJVe" {% if user.userprofile.bible_ver == "enKJVe"%}selected=""{% endif %}>King James (Authorised) Version Ecumenical</option>
+              <option value="enKJVp" {% if user.userprofile.bible_ver == "enKJVp"%}selected=""{% endif %}>King James (Authorised) Version Protestant</option>
+              <option value="engojp" {% if user.userprofile.bible_ver == "engojp"%}selected=""{% endif %}>JPS TaNaKH 1917 Jewish</option>
+              <option value="engRV" {% if user.userprofile.bible_ver == "engRV"%}selected=""{% endif %}>Revised Version 1885 Interconfessional</option>
+              <option value="GNT" {% if user.userprofile.bible_ver == "GNT"%}selected=""{% endif %}>Good News Translation Protestant Bible</option>
+              <option value="GNTD" {% if user.userprofile.bible_ver == "GNTD"%}selected=""{% endif %}>Good News Translation (US Version) Catholic Interconfessional Bible</option>
+              <option value="T4T" {% if user.userprofile.bible_ver == "T4T"%}selected=""{% endif %}>Translation for Translators common</option>
+              <option value="WEBE" {% if user.userprofile.bible_ver == "WEBE"%}selected=""{% endif %}>World English Bible Ecumenical</option>
+              <option value="WEBC" {% if user.userprofile.bible_ver == "WEBC"%}selected=""{% endif %}>World English Bible Catholic</option>
+              <option value="WEBO" {% if user.userprofile.bible_ver == "WEBO"%}selected=""{% endif %}>World English Bible Orthodox</option>
+              <option value="WEBP" {% if user.userprofile.bible_ver == "WEBP"%}selected=""{% endif %}>World English Bible Protestant</option>
+              <option value="WEBBEE" {% if user.userprofile.bible_ver == "WEBBEE"%}selected=""{% endif %}>World English Bible British Edition Ecumenical</option>
+              <option value="WEBBEC" {% if user.userprofile.bible_ver == "WEBBEC"%}selected=""{% endif %}>World English Bible British Edition Catholic</option>
+              <option value="WEBBEO" {% if user.userprofile.bible_ver == "WEBBEO"%}selected=""{% endif %}>World English Bible British Edition Orthodox</option>
+              <option value="WEBBEP" {% if user.userprofile.bible_ver == "WEBBEP"%}selected=""{% endif %}>World English Bible British Edition Protestant</option>
+              <option value="WMB" {% if user.userprofile.bible_ver == "WMB"%}selected=""{% endif %}>World Messianic Bible Messianic</option>
+              <option value="WMBBEM" {% if user.userprofile.bible_ver == "WMBBEM"%}selected=""{% endif %}>World Messianic Bible British Edition Messianic</option>
             </select>
-            <button class="btn btn-flat" id="form_submit" type="submit" name="submit" value="Search">Submit <i class="ti-arrow-right"></i></button>
+            <br><br><br>
+            <label for="bio"><h4><strong>Bio:</strong></h4></label>
+            <h6>Write a description of yourself here. Maybe include your favourite bible verse or a short testimony!</h6>
+            <textarea name="bio" id="bio" class="form-control" type="text" rows="5" maxlength="500">{{ user.userprofile.bio }}</textarea>
+            <br><br><br>
+            <label for="description"><h4><strong>Description:</strong></h4></label>
+            <h6>Write a very short description of yourself that users will be able to see next to your username!</h6>
+            <input name="description" id="description" class="form-control" type="text" value="{{ user.userprofile.desc }}" maxlength="50">
+            <button class="btn btn-flat" id="form_submit" type="submit" name="submit" value="Search">Update <i class="ti-arrow-right"></i></button>
         </form>
         </div>
     </div>

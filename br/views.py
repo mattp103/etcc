@@ -12,9 +12,9 @@ def index(request):
     if user.is_authenticated:
         d = int(strftime("%j"))-1
         # checks for progress objects
-        if len(Progress.objects.filter(usr=user, date=d)) == 0:
-            pass
-
+        for reading in Reading.objects.filter(date=d):
+            if len(Progress.objects.filter(usr=user, reading=reading)) == 0:
+                Progress.objects.create(reading=reading, usr=user, status=False)
 
         t_progs = []
 
@@ -47,7 +47,15 @@ def settings(request):
         if new_bible_ver in readings.versions:
             u = request.user.userprofile
             u.bible_ver = new_bible_ver
+            b = request.POST.get('bio')
+            d = request.POST.get('description')
+            u.desc = d
+            u.bio = b
+            messages.success(request, "Settings updated")
             u.save()
+            print(u.bio)
+
+            return redirect('settings')
         else:
             messages.error(request, f"No bible version with the name {new_bible_ver}")
     comments = Comment.objects.filter(author=request.user).order_by('-date_posted')

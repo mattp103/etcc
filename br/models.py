@@ -31,11 +31,3 @@ class Progress(models.Model):
 
     def __str__(self):
         return str(self.status)
-
-
-# def save_profile(sender, instance, created, **kwargs):
-#     if created:
-#         for reading in Reading.objects.all():
-#             Progress.objects.create(usr=user, reading=reading, status=False)
-#
-# post_save.connect(save_profile, sender=User)
