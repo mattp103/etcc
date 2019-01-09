@@ -99,12 +99,18 @@ def reading(request, number):
 
         return redirect('/reading/' + n)
 
-    # try:
+    t_progs = []
+    d = int(strftime("%j"))-1
+    for reading in Reading.objects.filter(date=d):
+        po = Progress.objects.get(usr=request.user, reading=reading)
+        t_progs.append(po.status)
+
     return render(request, 'br/reading.html',
     {'reading': reading_data[2], 'reference': reading_data[1],
      'v': reading_data[1].split(":")[0], 'lv': reading_data[1].split("-")[-1],
       'copyright': reading_data[0], 'current_num': int(number),
-      'notes': Comment.objects.filter(reading=Reading.objects.get(date=int(strftime("%j"))-1, r=readings.jr("testplan1", int(number))))})
+      'notes': Comment.objects.filter(reading=Reading.objects.get(date=int(strftime("%j"))-1, r=readings.jr("testplan1", int(number)))),
+      't_p': t_progs[int(number)]})
 
 
     # 'notes': Comment.objects.filter(author=request.user.userprofile.friends.all()[0],

@@ -41,9 +41,6 @@ def signup(request):
 
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
-            for reading in Reading.objects.all():
-                Progress.objects.create(usr=user, reading=reading, status=False)
-
             return redirect('index')
 
         else:

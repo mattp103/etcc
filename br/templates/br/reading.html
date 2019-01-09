@@ -88,16 +88,16 @@
                         <nav>
                             <ul class="pagination justify-content-center">
                                 <li class="page-item">
-                                    {% if current_num > 0 %}<a class="page-link" href="/reading/{{ current_num|add:"-1" }}">Previous</a>
+                                    {% if current_num > 0 %}<a class="page-link" {% if not t_p %}data-toggle="modal" data-target="#chapterCheck" onclick="getPage({{ current_num|add:"-1" }})"{% else %}href="/reading/{{ current_num|add:"-1" }}"{% endif %}>Previous</a>
                                     {% else %}<a class="page-link disabled">Previous</a>
                                     {% endif %}
                                 </li>
-                                <li class="page-item {% if current_num == 0 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="getPage(0)"><a class="page-link">1</a></li>
-                                <li class="page-item {% if current_num == 1 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="getPage(1)"><a class="page-link">2</a></li>
-                                <li class="page-item {% if current_num == 2 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="getPage(2)"><a class="page-link">3</a></li>
-                                <li class="page-item {% if current_num == 3 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="getPage(3)"><a class="page-link">4</a></li>
+                                <li class="page-item {% if current_num == 0 %} active {% endif %}" {% if not t_p %} data-toggle="modal" data-target="#chapterCheck" onclick="getPage(0)"> <a class="page-link">1</a></li>{% else %}><a class="page-link" href="/reading/0">1</a></li>{% endif %}
+                                <li class="page-item {% if current_num == 1 %} active {% endif %}" {% if not t_p %} data-toggle="modal" data-target="#chapterCheck" onclick="getPage(1)"> <a class="page-link">2</a></li>{% else %}><a class="page-link" href="/reading/1">2</a></li>{% endif %}
+                                <li class="page-item {% if current_num == 2 %} active {% endif %}" {% if not t_p %} data-toggle="modal" data-target="#chapterCheck" onclick="getPage(2)"> <a class="page-link">3</a></li>{% else %}><a class="page-link" href="/reading/2">3</a></li>{% endif %}
+                                <li class="page-item {% if current_num == 3 %} active {% endif %}" {% if not t_p %} data-toggle="modal" data-target="#chapterCheck" onclick="getPage(3)"> <a class="page-link">4</a></li>{% else %}><a class="page-link" href="/reading/3">4</a></li>{% endif %}
                                 <li class="page-item">
-                                    {% if current_num < 3 %}<a class="page-link" data-toggle="modal" data-target="#chapterCheck">Next</a>
+                                    {% if current_num < 3 %}<a class="page-link" {% if not t_p %}data-toggle="modal" data-target="#chapterCheck" onclick="getPage({{ current_num|add:"1" }})"{{ current_num|add:"1" }}{% else %}href="/reading/{{ current_num|add:"1" }}"{% endif %}>Next</a>
                                     {% else %}<a class="page-link disabled">Next</a>
                                     {% endif %}
                                 </li>
@@ -126,8 +126,8 @@
 
                         <script type="text/javascript">
                           function getPage(page) {
-                            var p =page;
-                            console.log(p)
+                            var p = page;
+                            console.log(p);
                             document.getElementById('redirect').value = p;
                           }
                         </script>
