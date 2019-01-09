@@ -92,10 +92,10 @@
                                     {% else %}<a class="page-link disabled">Previous</a>
                                     {% endif %}
                                 </li>
-                                <li class="page-item {% if current_num == 0 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="p=0;"><a class="page-link">1</a></li>
-                                <li class="page-item {% if current_num == 1 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="p=1;"><a class="page-link">2</a></li>
-                                <li class="page-item {% if current_num == 2 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="p=2;"><a class="page-link">3</a></li>
-                                <li class="page-item {% if current_num == 3 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="p=3;"><a class="page-link">4</a></li>
+                                <li class="page-item {% if current_num == 0 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="getPage(0)"><a class="page-link">1</a></li>
+                                <li class="page-item {% if current_num == 1 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="getPage(1)"><a class="page-link">2</a></li>
+                                <li class="page-item {% if current_num == 2 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="getPage(2)"><a class="page-link">3</a></li>
+                                <li class="page-item {% if current_num == 3 %} active" {% else %}" data-toggle="modal" data-target="#chapterCheck"{% endif %} onclick="getPage(3)"><a class="page-link">4</a></li>
                                 <li class="page-item">
                                     {% if current_num < 3 %}<a class="page-link" data-toggle="modal" data-target="#chapterCheck">Next</a>
                                     {% else %}<a class="page-link disabled">Next</a>
@@ -103,6 +103,8 @@
                                 </li>
                             </ul>
                         </nav>
+
+
                         <!-- Modal -->
                         <div class="modal fade" id="chapterCheck">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -114,16 +116,23 @@
                                     <div class="modal-body">
                                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius voluptates explicabo natus nobis, aperiam placeat aliquid nisi ut exercitationem dolor quisquam nam tempora voluptatem. Unde dignissimos est aliquid quidem porro dolorum ipsam suscipit animi quas, debitis ea, sunt quo distinctio doloribus eveniet dolores tempore delectus voluptatum! Possimus earum asperiores animi.</p>
                                     </div>
-                                    <script>
-                                      document.getElementById("redirect").setAttribute('value', p);
-                                    </script>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <form method="post" name="save">{% csrf_token %}<input name="redirect" id="redirect" type="text"><button class="btn btn-flat btn-green" name="glen" type="submit" id="submit" value="Finished with this chapter?">Finished with this chapter?</button></form>
+                                        <form method="post" name="save">{% csrf_token %}<input name="redirect" id="redirect" type="hidden" ><button class="btn btn-flat btn-green" name="glen" type="submit" id="submit" value="Finished with this chapter?">Finished with this chapter?</button></form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <script type="text/javascript">
+                          function getPage(page) {
+                            var p =page;
+                            console.log(p)
+                            document.getElementById('redirect').value = p;
+                          }
+                        </script>
+
+
                         <!-- Modal end -->
                       </div>
                     </div>

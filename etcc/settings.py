@@ -92,6 +92,7 @@ CACHES = {
 # Google Sign in etc.
 # Ethan if u need any help :)
 
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='654588663348-rf54ucnch947oelm98710eepr4lcbagg.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Gha7JPNK6MIPQ95R2q04WdxQ'
 
