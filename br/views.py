@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from user.models import UserProfile
-from .models import Comment, Reading, Progress
+from .models import *
 import readings
 from time import strftime
 
@@ -220,3 +220,42 @@ def password(request):
             messages.error(request, 'Your password was incorrect')
 
     return render(request, 'br/password.html')
+
+@login_required
+def groups(request):
+    if request.method == 'POST':
+        user = request.user
+        search = request.POST.get("code")
+
+        group_x = readingGroup.objects.filter(code=search).exists()
+
+        if group_x:
+            group = readingGroup.objects.get(code=search)
+            return redirect('/groups/' + group.code)
+
+        else:
+            messages.error(request, f"No group with the code {search}")
+
+    return render(request, 'br/groups.html')
+
+@login_required
+def group(request, code):
+    gp = get_object_or_404(readingGroup, code=code)
+    # if request.method == 'POST':
+    #     if usr != request.user:
+    #         request.user.userprofile.friends.add(usr)
+    #         messages.success(request, f'User {usr.username} added to friends!')
+    #         return redirect('index')
+    #     else:
+    #         messages.error(request, "You can't add yourself. Don't be lonely!")
+    #         return redirect('index')
+    # else:
+    if request.user in gp.members.all():
+        in_group = False
+    else:
+        in_group = True
+    if request.user == gp.admin:
+        admin = True
+    else:
+        admin = False
+    return render(request, 'br/group_veiw.html', {'gp': gp, 'in_group': in_group, 'admin': admin})

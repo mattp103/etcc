@@ -1,15 +1,15 @@
 {% extends 'br/home.html' %}
 
-{% block title %}{{ usr.username }}'s Profile{% endblock %}
+{% block title %}{{ gp.title }}{% endblock %}
 
 
 {% block top %}
-<h4 class="page-title pull-left">{{ usr.username }}'s Profile</h4>
+<h4 class="page-title pull-left">{{ gp.title }}</h4>
 <ul class="breadcrumbs pull-left">
     <li><a href="{% url 'index' %}">Home</a></li>
-    {% if cp %}
-    {% elif cp is not True %}<li><a href="{% url 'new_friend' %}">Search</a></li>
-    {% elif at %}<li><a href="{% url 'friends' %}">Friends</a></li>{% endif %}
+    {% if admin %}
+    {% elif in_group %}<li><a href="{% url 'friends' %}">Friends</a></li>
+    {% elif admin is not True %}<li><a href="{% url 'new_friend' %}">Group</a></li>{% endif %}
     <li><span>Profile</span></li>
 </ul>
 {% endblock %}
@@ -18,7 +18,7 @@
 {% block content %}
 <br>
 <br>
-<div class="row"><div class="col-md-6"><h2 class="profile-title">{{ usr.username|upper }} - </h2><h4>{{ usr.userprofile.desc }}</h4></div><div class="col-md-6">{% if cp %}</div>{% elif cp is not True %}<form method="post">{% csrf_token %}<button class="btn btn-flat bg-transparent profile-title float-right" type="submit"><h4>Add to Friends?</h4></button></form></div></div></div>{% elif at %}<h4 class="profile-title">{{ usr.username }} already in friends</h4></div>{% endif %}
+<div class="row"><div class="col-md-6"><h2 class="profile-title">{{ gp.title|upper }} - </h2><h4>{{ gp.tagline }}</h4></div><div class="col-md-6">{% if admin %}</div>{% elif admin is not True %}<form method="post">{% csrf_token %}<button class="btn btn-flat bg-transparent profile-title float-right" type="submit"><h4>Join Group?</h4></button></form></div></div></div>{% elif in_group %}<h4 class="profile-title">You're already in {{ gp.title }}</h4></div>{% endif %}
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -30,15 +30,15 @@
                     <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#pills-comments" role="tab" aria-controls="pills-comments" aria-selected="false">Comments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Somthing else</a>
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Announcements</a>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
-                    <p>{% if cp %}{% if usr.userprofile.bio %}{{ usr.userprofile.bio }}{% else %}You don't have a bio yet! <a href="{% url 'settings' %}">Why don't you write one?</a>{% endif %}{% endif %}</p>
+                    <p>{% if admin %}{% if gp.description %}{{ gp.description }}{% else %}You don't have a bio yet! <a href="{% url 'index' %}">Why don't you write one?</a>{% endif %}{% endif %}</p>
                 </div>
                 <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
-                  {% for comment in comments %}
+                  <!-- {% comment %}{% for comment in comments %}
                   <div class="col-lg-4 col-md-6 mt-3">
                       <div class="card card-bordered">
                           <div class="card-body">
@@ -48,7 +48,7 @@
                           </div>
                       </div>
                   </div>
-                  {% endfor %}
+                  {% endfor %}{% endcomment %} -->
                 </div>
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ratione officia libero maiores, explicabo cumque dolorem quasi rerum molestiae. Ex ut tempora odit voluptatem, libero culpa nostrum dolores enim velit magnam repellendus! Porro repudiandae mollitia odit eveniet molestias consequuntur deleniti quisquam ducimus quidem autem? Error culpa nostrum, nemo quo quisquam illo architecto id nihil pariatur esse recusandae alias quaerat voluptates iure consequuntur repellat cupiditate perferendis iste praesentium. Suscipit, molestias consequatur.</p>
