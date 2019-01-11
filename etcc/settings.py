@@ -160,6 +160,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
+MEDIA_URL = '/static/'
+
 STATIC_ROOT = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
