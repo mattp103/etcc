@@ -7,18 +7,18 @@ import random
 
 
 class Notice(models.Model):
-        title = models.CharField(max_length=100)
-        content = models.TextField()
-        date_posted = models.DateField(default=datetime.date.today)
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date_posted = models.DateField(default=datetime.date.today)
 
-        def __str__(self):
-                return self.title
+    def __str__(self):
+            return self.title
 
 
 class readingGroup(models.Model):
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    code = models.CharField(max_length=6)
+    code = models.Charfield(max_length=6, unique=True)
     members = models.ManyToManyField(User, related_name="member")
     description = models.TextField(max_length=500)
     tagline = models.TextField(max_length=50)
@@ -31,7 +31,7 @@ class readingGroup(models.Model):
 @receiver(post_save, sender=readingGroup)
 def create_group(sender, instance, created, **kwargs):
     if created:
-        instance.code = ''.join(random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVQXYZ0123456789!@#$%^&*(-_=+)') for i in range(6))
+        instance.code =''.join(random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVQXYZ0123456789!@#$%^&*(-_=+)') for i in range(6))
         instance.save()
 
 
