@@ -160,7 +160,7 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-MEDIA_URL = '/static/'
+MEDIA_URL = os.path.join(BASE_DIR, "media/images")
 
 STATIC_ROOT = '/static/'
 
