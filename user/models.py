@@ -30,6 +30,7 @@ class UserProfile(models.Model):
     desc = models.TextField(max_length=50, blank=True)
     friends = models.ManyToManyField(User, related_name="person")
     bible_ver = models.CharField(max_length=6, choices=bible_versions, default="WEBP")
+    group = models.CharField(max_length=6, blank=True)
 
     def __str__(self):
         return self.user.first_name

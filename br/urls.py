@@ -13,4 +13,6 @@ urlpatterns = [
     path('settings/edit/password/', v.password, name="password-edit"),
     path('settings/edit/comment/<int:c_pk>', v.comment_edit),
     path('settings/delete/comment/<int:c_pk>', v.comment_delete),
+    path('groups/', v.groups, name="groups"),
+    path('groups/<code>/', v.group),
 ]

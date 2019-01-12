@@ -1,7 +1,7 @@
-{% extends 'br/home.html' %}
+{% extends 'br/temp.html' %}
 
 {% block content %}
-<a href="{% url 'settings' %}"><button type="button" name="button">No Back</button></a>
+<a href="{% url 'settings' %}"><button type="button" name="button" class="btn btn-flat btn-danger">Go Back<i class="fa fa-arrow-left"</button></a>
   <form method="post">{% csrf_token %}
     <input type="submit" value="Delete">
   </form>
