@@ -60,7 +60,10 @@ def settings(request):
         else:
             messages.error(request, f"No bible version with the name {new_bible_ver}")
     comments = Comment.objects.filter(author=request.user).order_by('-date_posted')
-    return render(request, 'br/settings.html', {'comments': comments})
+    paginator = Paginator(comments, 3) # Show 25 contacts per page
+    page = request.GET.get('page')
+    c = paginator.get_page(page)
+    return render(request, 'br/settings.html', {'comments': c})
 
 
 @login_required
@@ -189,7 +192,7 @@ def profile(request, username):
             cp = True
         else:
             cp = False
-    return render(request, 'br/profile.html', {'usr': usr, 'comments': Comment.objects.filter(author=usr).order_by('-date_posted'), 'at': at, 'cp': cp})
+    return render(request, 'br/profile.html', {'usr': usr, 'comments': c, 'at': at, 'cp': cp})
 
 
 @login_required

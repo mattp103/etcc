@@ -24,20 +24,20 @@
         <div class="card-body">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="pills-general-tab" data-toggle="pill" href="#pills-general" role="tab" aria-controls="pills-general" aria-selected="true">General Info</a>
+                    <a class="nav-link" id="pills-general-tab" data-toggle="pill" href="#pills-general" role="tab" aria-controls="pills-general" aria-selected="true">General Info</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#pills-comments" role="tab" aria-controls="pills-comments" aria-selected="false">Comments</a>
+                    <a class="nav-link active" id="pills-comments-tab" data-toggle="pill" href="#pills-comments" role="tab" aria-controls="pills-comments" aria-selected="false">Comments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Somthing else</a>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+                <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
                     <p>{% if cp %}{% if bio %}{{ usr.UserProfile.bio }}{% else %}You don't have a bio yet! <a href="{% url 'settings' %}">Why don't you write one?</a>{% endif %}{% endif %}</p>
                 </div>
-                <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
+                <div class="tab-pane fade show active" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
                   {% for comment in comments %}
                   <div class="col-lg-4 col-md-6 mt-3">
                       <div class="card card-bordered">
@@ -51,18 +51,18 @@
                   {% endfor %}
                   <div class="pagination">
                     <span class="step-links">
-                        {% if c.has_previous %}
+                        {% if comments.has_previous %}
                             <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ c.previous_page_number }}">previous</a>
+                            <a href="?page={{ comments.previous_page_number }}">previous</a>
                         {% endif %}
 
                         <span class="current">
-                            Page {{ c.number }} of {{ c.paginator.num_pages }}.
+                            Page {{ comments.number }} of {{ comments.paginator.num_pages }}.
                         </span>
 
-                        {% if c.has_next %}
-                            <a href="?page={{ c.next_page_number }}">next</a>
-                            <a href="?page={{ c.paginator.num_pages }}">last &raquo;</a>
+                        {% if comments.has_next %}
+                            <a href="?page={{ comments.next_page_number }}">next</a>
+                            <a href="?page={{ comments.paginator.num_pages }}">last &raquo;</a>
                         {% endif %}
                     </span>
                   </div>
