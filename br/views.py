@@ -6,6 +6,7 @@ from user.models import UserProfile
 from .models import *
 import readings
 from time import strftime
+from django.core.paginator import Paginator
 
 def index(request):
     user = request.user
@@ -167,6 +168,10 @@ def comment_delete(request, c_pk):
 @login_required
 def profile(request, username):
     usr = get_object_or_404(User, username=username)
+    comments = Comment.objects.filter(author=usr).order_by('-date_posted')
+    paginator = Paginator(comments, 5) # Show 25 contacts per page
+    page = request.GET.get('page')
+    c = paginator.get_page(page)
     if request.method == 'POST':
         if usr != request.user:
             request.user.userprofile.friends.add(usr)
